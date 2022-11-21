@@ -16,4 +16,8 @@ export const findAllBooks = async () => {
 
 export const updateBook = async () => {}
 
-export const deleteBook = async () => {}
+export const deleteBook = async (bid) => {
+    const response = await axios.delete(`${BOOK_API_URL}/${bid}`)
+    const status = response.data
+    return bid
+}
