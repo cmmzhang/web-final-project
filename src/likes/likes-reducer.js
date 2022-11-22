@@ -1,17 +1,17 @@
-import {createBooksThunk, findAllBooksThunk} from "./books-thunks";
 import {createSlice} from "@reduxjs/toolkit";
+import {userLikesBookThunk} from "./likes-thunks";
 
-const booksReducer = createSlice ({
-  name: 'books',
-  initialState: [],
+const initialState = {
+  likes: [],
+  loading: false
+}
+
+export const likesReducer = createSlice ({
+  name: 'likes',
+  initialState,
   extraReducers: {
-    [findAllBooksThunk.fulfilled]: (state, action) => {
-      return state = action.payload
-    },
-    [createBooksThunk().fulfilled]: (state, action) => {
-      state.push(action.payload)
+    [userLikesBookThunk.fulfilled]: (state, action) => {
+      state.likes.push(action.payload)
     }
   }
 })
-
-export default booksReducer.reducer;
