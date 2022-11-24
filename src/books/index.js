@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {createBooksThunk, deleteBooksThunk, findAllBooksThunk} from "./books-thunks";
+import {userLikesBookThunk, userUnlikesBookThunk} from "../likes/likes-thunks";
 
 const Books = () => {
     const {books} = useSelector((state) => state.books)
@@ -29,10 +30,17 @@ const Books = () => {
                 {
                     books.map((book) =>
                         <li key={book._id}>
-                            <button>
+                            <button onClick={() => {
+                                dispatch(userLikesBookThunk({uid:111, bid:book._id}))
+                            }}>
                                 Like
                             </button>
 
+                            <button onClick={() => {
+                                dispatch(userUnlikesBookThunk({uid:111, bid:book._id}))
+                            }}>
+                                Unlike
+                            </button>
                             <button onClick={() => {
                                 dispatch(deleteBooksThunk(book._id))
                             }}>

@@ -5,12 +5,14 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import booksapiReducer from "./booksapi/booksapi-reducer";
 import BooksApiSearch from "./booksapi/booksapi-search";
+import {likesReducer} from "./likes/likes-reducer";
 
 
 const store = configureStore( {
     reducer: {
         books: booksReducer,
-        booksapi: booksapiReducer
+        booksapi: booksapiReducer,
+        likes:likesReducer
     }
 })
 
