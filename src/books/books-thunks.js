@@ -18,6 +18,6 @@ export const updateBooksThunk = createAsyncThunk(
 
 export const deleteBooksThunk = createAsyncThunk(
     'deleteBooks',
-    () => deleteBook()
+    (bid) => deleteBook(bid)
 
 )

@@ -6,6 +6,7 @@ const initialState = {
   loading: false
 }
 
+<<<<<<< HEAD
 export const likesReducer = createSlice({
   name: 'likes',
   initialState,
@@ -15,3 +16,14 @@ export const likesReducer = createSlice({
     }
   }
 })
+=======
+export const likesReducer = createSlice ({
+  name: 'likes',
+  initialState,
+  extraReducers: {
+    [userLikesBookThunk.fulfilled]: (state, action) => {
+      state.likes.push(action.payload)
+    }
+  }
+})
+>>>>>>> origin/master
