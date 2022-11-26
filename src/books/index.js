@@ -14,20 +14,26 @@ const Books = () => {
         dispatch(findAllBooksThunk())
     }, [])
     const likeBook = (book) => {
-        const updatedBook = {
-            ...book,
-            likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount + 1
+        if (!book.liked) {
+            const updatedBook = {
+                ...book,
+                liked: true,
+                likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount + 1
+            }
+            dispatch(updateBooksThunk(updatedBook))
+            dispatch(userLikesBookThunk({uid:111, bid:book._id}))
         }
-        dispatch(updateBooksThunk(updatedBook))
-        dispatch(userLikesBookThunk({uid:111, bid:book._id}))
     }
     const unlikeBook = (book) => {
-        const updatedBook = {
-            ...book,
-            likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount - 1
+        if (book.liked){
+            const updatedBook = {
+                ...book,
+                liked: false,
+                likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount - 1
+            }
+            dispatch(updateBooksThunk(updatedBook))
+            dispatch(userUnlikesBookThunk({uid:111, bid:book._id}))
         }
-        dispatch(updateBooksThunk(updatedBook))
-        dispatch(userUnlikesBookThunk({uid:111, bid:book._id}))
     }
     return(
         <>
@@ -52,15 +58,18 @@ const Books = () => {
                             <button onClick={() => {likeBook(book)}}>
                                 Like
                             </button>
+
                             <button onClick={() => {unlikeBook(book)}}>
                                 Unlike
                             </button>
                             <span> {book.likeCount} Likes</span>
+
                             <button onClick={() => {
                                 dispatch(deleteBooksThunk(book._id))
                             }}>
                                 Delete
                             </button>
+
                             {book.title}
                         </li>
                     )
