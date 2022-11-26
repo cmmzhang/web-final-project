@@ -1,7 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {createBooksThunk, deleteBooksThunk, findAllBooksThunk} from "./books-thunks";
-import {userLikesBookThunk, userUnlikesBookThunk} from "../likes/likes-thunks";
+import {createBooksThunk, deleteBooksThunk, findAllBooksThunk, updateBooksThunk} from "./books-thunks";
+import {
+    userLikesBookThunk,
+    userUnlikesBookThunk,
+} from "../likes/likes-thunks";
 
 const Books = () => {
     const {books} = useSelector((state) => state.books)
@@ -10,6 +13,22 @@ const Books = () => {
     useEffect(() => {
         dispatch(findAllBooksThunk())
     }, [])
+    const likeBook = (book) => {
+        const updatedBook = {
+            ...book,
+            likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount + 1
+        }
+        dispatch(updateBooksThunk(updatedBook))
+        dispatch(userLikesBookThunk({uid:111, bid:book._id}))
+    }
+    const unlikeBook = (book) => {
+        const updatedBook = {
+            ...book,
+            likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount - 1
+        }
+        dispatch(updateBooksThunk(updatedBook))
+        dispatch(userUnlikesBookThunk({uid:111, bid:book._id}))
+    }
     return(
         <>
             <h1>Books</h1>
@@ -30,17 +49,13 @@ const Books = () => {
                 {
                     books.map((book) =>
                         <li key={book._id}>
-                            <button onClick={() => {
-                                dispatch(userLikesBookThunk({uid:111, bid:book._id}))
-                            }}>
+                            <button onClick={() => {likeBook(book)}}>
                                 Like
                             </button>
-
-                            <button onClick={() => {
-                                dispatch(userUnlikesBookThunk({uid:111, bid:book._id}))
-                            }}>
+                            <button onClick={() => {unlikeBook(book)}}>
                                 Unlike
                             </button>
+                            <span> {book.likeCount} Likes</span>
                             <button onClick={() => {
                                 dispatch(deleteBooksThunk(book._id))
                             }}>
