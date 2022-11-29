@@ -3,10 +3,10 @@ import {useEffect, useState} from "react";
 import {findBookBySearchTerm} from "./booksapi-service";
 import {findBookBySearchTermThunk} from "./booksapi-thunks";
 import {userLikesBookThunk} from "../likes/likes-thunks";
-import {userReviewsBookThunk} from "../reviews/reviews-thunks";
+import {userReviewsBookThunk, findAllReviewsThunk} from "../reviews/reviews-thunks";
 
 const BooksApiSearch = () => {
-    const [searchTerm, setSearchTerm] = useState('Java')
+    const [searchTerm, setSearchTerm] = useState('becoming')
     //Create review
     const [reviewBook, setReviewBook] = useState('')
     const {books, loading} = useSelector((state) => state.booksapi)
@@ -15,14 +15,14 @@ const BooksApiSearch = () => {
        dispatch(findBookBySearchTermThunk(searchTerm))
     }, [])
 
-    const reviewClickHandler = () => {
-        console.log(reviewBook);
-        const newReview = {
-            review: reviewBook
-        }
+    const CreateReviewClickHandler = () => {
+        const newReview = {uid: "111", bid: "123", review: reviewBook}
         //a8 update frm createTuit to createTuitThunk
-        dispatch(userReviewsBookThunk(111, 123));
+        dispatch(userReviewsBookThunk(newReview));
     }
+    // const AllReviewClickHandler = () => {
+    //     dispatch(findAllReviewsThunk());
+    // }
 
 
     return(
@@ -54,16 +54,19 @@ const BooksApiSearch = () => {
                                       onChange={(event) => setReviewBook(event.target.value)}>
                             </textarea>
                             <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
-                                    onClick={reviewClickHandler}>
+                                    onClick={CreateReviewClickHandler}>
                                 Review
                             </button>
-                            {/*<button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"*/}
-                            {/*        onClick={() => {*/}
-                            {/*    dispatch(userReviewsBookThunk(111, book.booksapiID))*/}
-                            {/*}}>*/}
-                            {/*    Review*/}
-                            {/*</button>*/}
 
+                            {/* Find all reviews */}
+                            {/* <textarea placeholder="see all"
+                                      className="form-control border-0">
+                            </textarea> */}
+                            {/* <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
+                                onClick={AllReviewClickHandler}>
+                                Show All Reviews
+                            </button> */}
+  
 
 
                         </li>

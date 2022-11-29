@@ -4,8 +4,11 @@ const USERS_URL = 'http://localhost:4000/users'
 const BOOKS_URL = 'http://localhost:4000/books'
 const ALL_REVIEWS_URL = 'http://localhost:4000/reviews'
 
-export const userReviewsBook = async (uid, bid) => {
-    const response = await axios.post(`${USERS_URL}/${uid}/reviews/${bid}`)
+export const userReviewsBook = async (newReview) => {
+    console.log("newReview: ", newReview);
+    const response = await axios.post(`${USERS_URL}/${newReview.uid}/reviews/${newReview.bid}`, newReview)
+    console.log("response: ", response);
+    console.log("response.data: ", response.data);
     return response.data
 }
 

@@ -8,26 +8,24 @@ import {
 } from "./reviews-thunks";
 
 const initialState = {
-    reviews: [
-        {_id: 'review123', user: '111', book: '123'},
-        {_id: 'review234', user: '111', book: '234'},
-        {_id: 'review345', user: '222', book: '123'},
-        {_id: 'review456', user: '333', book: '234'},
-    ],
-    loading: false
+    reviews: [],
+    loading: true
 }
 
 export const ReviewsReducer = createSlice ({
     name: 'reviews',
-    initialState,
+    initialState:initialState,
     extraReducers: {
         [userReviewsBookThunk.fulfilled]: (state,action) => {
-            state.reviews.push(action.payload)
+            console.log("state", state)
+            console.log("action.payload: ", action.payload)
+            state.reviews = action.payload
         },
 
         [findAllReviewsThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload
         },
+        
         [findBooksReviewedByUserThunk.fulfilled]: (state, action) => {
             const uid = state.reviews.findIndex(review => review.user === action.payload._id)
             state.reviews[uid] = action.payload
@@ -38,3 +36,5 @@ export const ReviewsReducer = createSlice ({
         }
     }
 })
+
+export default ReviewsReducer.reducer;

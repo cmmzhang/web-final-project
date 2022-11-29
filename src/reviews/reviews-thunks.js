@@ -3,8 +3,9 @@ import {userReviewsBook,findAllReviews,findBooksReviewedByUser,findUsersWhoRevie
 
 export const userReviewsBookThunk = createAsyncThunk(
     'userReviewsBook',
-    async (uid,bid) => {
-        return await userReviewsBook(uid, bid)
+    async (newReview) => {
+        console.log("newReview: ", newReview);
+        return await userReviewsBook(newReview)
     }
 )
 
