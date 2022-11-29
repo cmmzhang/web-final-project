@@ -13,7 +13,7 @@ export const findAllBooksThunk = createAsyncThunk(
 
 export const updateBooksThunk = createAsyncThunk(
     'updateBooks',
-    () => updateBook()
+    (newBook) => updateBook(newBook)
 )
 
 export const deleteBooksThunk = createAsyncThunk(

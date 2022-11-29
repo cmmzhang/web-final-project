@@ -27,7 +27,7 @@ export const likesReducer = createSlice ({
     },
     [userUnlikesBookThunk.fulfilled]: (state, action) => {
       state.likes = state.likes.filter((l) =>
-         l.user !== action.payload.uid && l.book !== action.payload.bid
+         l.user === action.payload.uid && l.book !== action.payload.bid
       )
     },
     [findAllLikesThunk.fulfilled]: (state, action) => {
