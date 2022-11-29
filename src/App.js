@@ -6,13 +6,14 @@ import {Provider} from "react-redux";
 import booksapiReducer from "./booksapi/booksapi-reducer";
 import BooksApiSearch from "./booksapi/booksapi-search";
 import {likesReducer} from "./likes/likes-reducer";
-
+import {ReviewsReducer} from "./reviews/reviews-reducer";
 
 const store = configureStore( {
     reducer: {
         books: booksReducer,
         booksapi: booksapiReducer,
-        likes:likesReducer
+        likes:likesReducer,
+        reviews:ReviewsReducer,
     }
 })
 
@@ -22,6 +23,7 @@ function App() {
         <Provider store = {store}>
             <BooksApiSearch/>
             <Books/>
+            {/*<ReviewsReducer/>*/}
         </Provider>
     </div>
   );
