@@ -1,35 +1,31 @@
 import './App.css';
 import Books from "./books";
 import booksReducer from "./books/books-reducer";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import {configureStore} from "@reduxjs/toolkit";
+import {Provider} from "react-redux";
 import booksapiReducer from "./booksapi/booksapi-reducer";
 import BooksApiSearch from "./booksapi/booksapi-search";
-import { likesReducer } from "./likes/likes-reducer";
-import usersReducer from "./users/users-reducer";
+import {likesReducer} from "./likes/likes-reducer";
+import CurrentUser from "./users/current-user";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Navigation from "./navigation";
 import UserList from "./users";
 import Register from "./users/register";
-import Login from "./users/login";
 import Profile from "./users/profile";
-import Navigation from "./navigation";
-import CurrentUser from "./users/current-user";
+import Login from "./users/login";
 
 
-const store = configureStore({
-  reducer: {
-    books: booksReducer,
-    booksapi: booksapiReducer,
-    likes: likesReducer,
-    users: usersReducer
-  }
+const store = configureStore( {
+    reducer: {
+        books: booksReducer,
+        booksapi: booksapiReducer,
+        likes:likesReducer
+    }
 })
 
 function App() {
   return (
-
     <div className="container mt-4 mb-4">
-
         <Provider store={store}>
           <CurrentUser>
             <BrowserRouter>
@@ -46,7 +42,6 @@ function App() {
           </CurrentUser>
         </Provider>
     </div>
-
   );
 }
 
