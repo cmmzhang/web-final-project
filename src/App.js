@@ -13,13 +13,14 @@ import UserList from "./users";
 import Register from "./users/register";
 import Profile from "./users/profile";
 import Login from "./users/login";
-
+import usersReducer from "./users/users-reducer";
 
 const store = configureStore( {
     reducer: {
         books: booksReducer,
         booksapi: booksapiReducer,
-        likes:likesReducer
+        likes:likesReducer,
+        users: usersReducer
     }
 })
 
