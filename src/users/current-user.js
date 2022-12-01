@@ -7,7 +7,7 @@ const CurrentUser = ({children}) => {
     // const {currentUser} = useSelector((state) => state.users)
     useEffect(() => {
         dispatch(profileThunk())
-    }, [])
+    }, [dispatch])
     return (children)
 }
 
