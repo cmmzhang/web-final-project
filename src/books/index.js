@@ -35,22 +35,21 @@ const Books = () => {
                 {
                     books.map((book) =>
                         <li key={book._id}>
-                            <button onClick={() => {
-                                dispatch(userLikesBookThunk({ uid: 111, bid: book._id }))
-                            }}>
-                                Like
-                            </button>
-
-                            <button onClick={() => {
-                                dispatch(userUnlikesBookThunk({ uid: 111, bid: book._id }))
-                            }}>
-                                Unlike
-                            </button>
-                            <button onClick={() => {
+                            <i onClick={() => {
                                 dispatch(deleteBooksThunk(book._id))
-                            }}>
-                                Delete
-                            </button>
+                            }}
+                               className="bi bi-trash float-end"></i>
+
+                            <i onClick={() => {
+                                dispatch(userLikesBookThunk({ uid: 111, bid: book._id }))
+                            }} className="float-end bi bi-hand-thumbs-up me-2">
+                            </i>
+
+                            <i onClick={() => {
+                                dispatch(userUnlikesBookThunk({ uid: 111, bid: book._id }))
+                            }} className="float-end bi bi-hand-thumbs-down me-2">
+                            </i>
+
                             {book.title}
                         </li>
                     )

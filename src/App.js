@@ -14,6 +14,8 @@ import Register from "./users/register";
 import Profile from "./users/profile";
 import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const store = configureStore( {
     reducer: {

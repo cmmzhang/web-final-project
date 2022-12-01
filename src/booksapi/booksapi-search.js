@@ -26,11 +26,10 @@ const BooksApiSearch = () => {
                 {
                     books.map((book) =>
                         <li key={book.booksapiID}>
-                            <button onClick={() => {
-                                dispatch(userLikesBookThunk(111, book.booksapiID))
-                            }}>
-                                Like
-                            </button>
+                          <i onClick={() => {
+                            dispatch(userLikesBookThunk({ uid: 111, bid: book._id }))
+                          }} className="float-end bi bi-hand-thumbs-up me-2">
+                          </i>
 
                             {book.book_title}
                         </li>
