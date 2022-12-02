@@ -5,7 +5,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import booksapiReducer from "./booksapi/booksapi-reducer";
 import BooksApiSearch from "./booksapi/booksapi-search";
-import {likesReducer} from "./likes/likes-reducer";
+import likesReducer from "./likes/likes-reducer"
 import CurrentUser from "./users/current-user";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Navigation from "./navigation";

@@ -3,15 +3,22 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {findBookByBooksApiId} from "./booksapi-service";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
-import {userLikesBookThunk, userUnlikesBookThunk} from "../likes/likes-thunks";
+import {
+  findUsersWhoLikedBookThunk,
+  userLikesBookThunk,
+  userUnlikesBookThunk
+} from "../likes/likes-thunks";
+import {Link} from "react-router-dom";
 
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
   const {details} = useSelector((state) => state.booksapi)
   const {currentUser} = useSelector((state) => state.users)
+  const {likes} = useSelector((state) => state.likes)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(findBookByBooksApiIdThunk(booksapiID))
+    dispatch(findUsersWhoLikedBookThunk(booksapiID))
   }, [])
   return (
       <>
@@ -30,6 +37,9 @@ const BooksApiDetails = () => {
             }
           </div>
         </div>
+        <pre>
+          {JSON.stringify(details, null, 2)}
+        </pre>
         <div>
           {
             currentUser &&
@@ -45,11 +55,22 @@ const BooksApiDetails = () => {
             }} className="float-end bi bi-hand-thumbs-down me-2">
             </i>
           }
-
         </div>
-{/*        <pre>
-                {JSON.stringify(details, null, 2)}
-            </pre>*/}
+        <div>
+          <h2>People who like this book</h2>
+          <ul className="list-group">
+            {
+              likes.map((like) =>
+                <li className="list-group-item" key={like._id}>
+                  <Link to={`/profile/${like.user._id}`}>
+                    {like.user.username}
+                  </Link>
+                </li>
+              )
+            }
+          </ul>
+        </div>
+
       </>
   )
 }

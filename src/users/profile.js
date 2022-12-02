@@ -4,6 +4,7 @@ import {logoutThunk} from "./users-thunk";
 
 const Profile = () => {
     const { currentUser } = useSelector((state) => state.users)
+    const {likes} = useSelector((state) => state.likes)
     const dispatch = useDispatch()
     const handleLogout = () => {
         dispatch(logoutThunk())
