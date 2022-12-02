@@ -1,9 +1,11 @@
-import {findBookBySearchTermThunk} from "./booksapi-thunks";
+import {findBookByBooksApiIdThunk, findBookBySearchTermThunk} from "./booksapi-thunks";
 import {createSlice} from "@reduxjs/toolkit";
+import {findBookByBooksApiId} from "./booksapi-service";
 
 const initialState = {
     books: [],
-    loading: false
+    loading: false,
+    details: {}
 }
 
 const booksapiReducer = createSlice ({
@@ -12,6 +14,9 @@ const booksapiReducer = createSlice ({
     extraReducers: {
         [findBookBySearchTermThunk.fulfilled]: (state, action) => {
             state.books = action.payload
+        },
+        [findBookByBooksApiIdThunk.fulfilled]: (state, action) => {
+            state.details = action.payload
         }
     }
 })

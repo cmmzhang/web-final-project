@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {findBookBySearchTerm} from "./booksapi-service";
 import {findBookBySearchTermThunk} from "./booksapi-thunks";
 import {userLikesBookThunk} from "../likes/likes-thunks";
+import {Link} from "react-router-dom";
 import {userReviewsBookThunk, findAllReviewsThunk} from "../reviews/reviews-thunks";
 
 const BooksApiSearch = () => {
@@ -45,8 +46,11 @@ const BooksApiSearch = () => {
                             }}>
                                 Like
                             </button>
+                            <Link to={`/details/${book.book_title}`}>
+                                {book.book_title}
+                            </Link>
 
-                            {book.book_title}
+
 
                             {/*CREATE REVIEW*/}
                             <textarea value={reviewBook} placeholder="What's your thought?"
