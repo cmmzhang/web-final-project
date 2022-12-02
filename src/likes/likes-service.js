@@ -4,6 +4,8 @@ const USERS_URL = 'http://localhost:4000/users'
 const BOOKS_URL = 'http://localhost:4000/books'
 const ALL_LIKES_URL = 'http://localhost:4000/likes'
 
+/*const api = axios.create({withCredentials:true});*/
+
 export const userLikesBook = async (uid, bid) => {
   const response = await axios.post(`${USERS_URL}/${uid}/likes/${bid}`)
   return response.data

@@ -16,6 +16,7 @@ import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import BooksApiDetails from "./booksapi/booksapi-details";
 
 const store = configureStore( {
     reducer: {
@@ -36,6 +37,7 @@ function App() {
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
+                <Route path="/details/:booksapiID" element={<BooksApiDetails/>}/>
                 <Route path="/users" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

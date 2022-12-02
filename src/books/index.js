@@ -13,7 +13,7 @@ const Books = () => {
     }, [])
     return (
         <>
-            <h1>Books</h1>
+            <h1>My Book List</h1>
             {
                 currentUser &&
                 <h2>Welcome {currentUser.username} </h2>
