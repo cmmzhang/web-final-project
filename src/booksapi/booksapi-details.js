@@ -3,12 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
 import {
+  findAllLikesThunk,
   findUsersWhoLikedBookThunk,
   userLikesBookThunk,
   userUnlikesBookThunk
 } from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
-import {createBooksThunk, updateBooksThunk} from "../books/books-thunks";
+
 
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
@@ -20,17 +21,20 @@ const BooksApiDetails = () => {
     dispatch(findBookByBooksApiIdThunk(booksapiID))
     dispatch(findUsersWhoLikedBookThunk(booksapiID))
   }, [])
-/*  const likeBook = (book) => {
-    if (!book.liked) {
-      const updatedBook = {
-        ...book,
-        liked: true,
-        likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount + 1
-      }
-      dispatch(updateBooksThunk(updatedBook))
-      dispatch(userLikesBookThunk({uid: currentUser._id, bid: booksapiID}))
+  const likeBook = () => {
+    if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
+      dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+    } else {
+        alert('You have already liked this book');
     }
-  }*/
+  }
+  const UnlikeBook = () => {
+    if (likes.filter((like) => like.user._id === currentUser._id).length !== 0) {
+      dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+    } else {
+      alert('You have not liked this book yet');
+    }
+  }
   return (
       <>
         <h1>{booksapiID}</h1>
@@ -54,17 +58,19 @@ const BooksApiDetails = () => {
         <div>
           {
             currentUser &&
-            <i onClick={() => {
-              dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-up me-2">
-            </i>
+            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+/*            <i onClick={() => {
+              dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+            }} className="float-end bi bi-hand-thumbs-down me-2">
+            </i>*/
           }
           {
             currentUser &&
-            <i onClick={() => {
-              dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-down me-2">
-            </i>
+            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+/*            <i onClick={() => {
+              dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+            }} className="float-end bi bi-hand-thumbs-up me-2">
+            </i>*/}
           }
         </div>
         <div>
