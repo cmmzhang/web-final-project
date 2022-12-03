@@ -4,7 +4,7 @@ import {findBookBySearchTerm} from "./booksapi-service";
 import {findBookBySearchTermThunk} from "./booksapi-thunks";
 import {userLikesBookThunk} from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
-import {userReviewsBookThunk, findAllReviewsThunk} from "../reviews/reviews-thunks";
+import {createReviewThunk, findReviewsByBookThunk} from "../reviews/reviews-thunks";
 
 const BooksApiSearch = () => {
     const [searchTerm, setSearchTerm] = useState('becoming')
@@ -16,11 +16,11 @@ const BooksApiSearch = () => {
        dispatch(findBookBySearchTermThunk(searchTerm))
     }, [])
 
-    const CreateReviewClickHandler = () => {
-        const newReview = {uid: "111", bid: "123", review: reviewBook}
-        //a8 update frm createTuit to createTuitThunk
-        dispatch(userReviewsBookThunk(newReview));
-    }
+    // const CreateReviewClickHandler = () => {
+    //     // const newReview = {uid: "111", bid: "123", review: reviewBook}
+    //     //a8 update frm createTuit to createTuitThunk
+    //     dispatch(createReviewThunk(newReview, booksapiID));
+    // }
     // const AllReviewClickHandler = () => {
     //     dispatch(findAllReviewsThunk());
     // }
@@ -49,18 +49,19 @@ const BooksApiSearch = () => {
                             <Link to={`/details/${book.book_title}`}>
                                 {book.book_title}
                             </Link>
+    
 
 
 
                             {/*CREATE REVIEW*/}
-                            <textarea value={reviewBook} placeholder="What's your thought?"
+                            {/* <textarea value={reviewBook} placeholder="What's your thought?"
                                       className="form-control border-0"
                                       onChange={(event) => setReviewBook(event.target.value)}>
                             </textarea>
                             <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
                                     onClick={CreateReviewClickHandler}>
                                 Review
-                            </button>
+                            </button> */}
 
                             {/* Find all reviews */}
                             {/* <textarea placeholder="see all"
@@ -70,19 +71,15 @@ const BooksApiSearch = () => {
                                 onClick={AllReviewClickHandler}>
                                 Show All Reviews
                             </button> */}
-  
-
-
-                        </li>
-
-
-
-
-
-
+                        </li>,
+                        
+    
                     )
                 }
             </ul>
+            
+            
+        
         </>
     )
 }
