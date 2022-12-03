@@ -29,8 +29,9 @@ const likesReducer = createSlice ({
       state.likes = action.payload
     },
     [findBooksLikedByUserThunk.fulfilled]: (state, action) => {
-      const uid = state.likes.findIndex(like => like.user === action.payload.uid)
-      state.likes[uid] = action.payload
+/*      const uid = state.likes.findIndex(like => like.user === action.payload.uid)
+      state.likes[uid] = action.payload*/
+      state.likes = action.payload
     },
     [findUsersWhoLikedBookThunk.fulfilled]: (state, action) => {
 /*      const bid = state.likes.findIndex(like => like.book === action.payload.bid)

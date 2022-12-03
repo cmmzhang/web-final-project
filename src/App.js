@@ -17,6 +17,7 @@ import usersReducer from "./users/users-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
+import PublicProfile from "./users/public-profile";
 
 const store = configureStore( {
     reducer: {
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:uid" element={<PublicProfile/>}/>
               </Routes>
             </BrowserRouter>
           </CurrentUser>

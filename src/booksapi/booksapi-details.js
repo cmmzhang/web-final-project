@@ -1,7 +1,6 @@
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {findBookByBooksApiId} from "./booksapi-service";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
 import {
   findUsersWhoLikedBookThunk,
@@ -60,7 +59,7 @@ const BooksApiDetails = () => {
           <h2>People who like this book</h2>
           <ul className="list-group">
             {
-              likes.map((like) =>
+                likes.map((like) =>
                 <li className="list-group-item" key={like._id}>
                   <Link to={`/profile/${like.user._id}`}>
                     {like.user.username}
