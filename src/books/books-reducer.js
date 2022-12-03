@@ -1,4 +1,4 @@
-import {createBooksThunk, deleteBooksThunk, findAllBooksThunk} from "./books-thunks";
+import {createBooksThunk, deleteBooksThunk, findAllBooksThunk,updateBooksThunk} from "./books-thunks";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
@@ -20,6 +20,10 @@ const booksReducer = createSlice ({
             state.books = state.books.filter(b => {
                 return b._id !== action.payload
             })
+        },
+        [updateBooksThunk.fulfilled]: (state, action) => {
+            const bookIndex = state.books.findIndex(book => book._id === action.payload._id)
+            state.books[bookIndex] = action.payload
         }
     }
 })

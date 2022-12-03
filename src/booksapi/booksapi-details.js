@@ -8,6 +8,7 @@ import {
   userUnlikesBookThunk
 } from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
+import {createBooksThunk, updateBooksThunk} from "../books/books-thunks";
 
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
@@ -19,6 +20,17 @@ const BooksApiDetails = () => {
     dispatch(findBookByBooksApiIdThunk(booksapiID))
     dispatch(findUsersWhoLikedBookThunk(booksapiID))
   }, [])
+/*  const likeBook = (book) => {
+    if (!book.liked) {
+      const updatedBook = {
+        ...book,
+        liked: true,
+        likeCount: typeof book.likeCount === 'undefined' ? 1 : book.likeCount + 1
+      }
+      dispatch(updateBooksThunk(updatedBook))
+      dispatch(userLikesBookThunk({uid: currentUser._id, bid: booksapiID}))
+    }
+  }*/
   return (
       <>
         <h1>{booksapiID}</h1>

@@ -14,7 +14,10 @@ export const findAllBooks = async () => {
     return books
 }
 
-export const updateBook = async () => {}
+export const updateBook = async (newBook) => {
+    const response = await axios.put(`${BOOK_API_URL}/${newBook._id}`, newBook)
+    return response.data
+}
 
 export const deleteBook = async (bid) => {
     const response = await axios.delete(`${BOOK_API_URL}/${bid}`)
