@@ -16,6 +16,7 @@ import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
 import PublicProfile from "./users/public-profile";
 

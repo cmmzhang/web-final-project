@@ -32,7 +32,7 @@ const BooksApiDetails = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length !== 0) {
       dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
     } else {
-      alert('You have not liked this book yet');
+        alert('You have not liked this book yet');
     }
   }
   return (
@@ -52,10 +52,10 @@ const BooksApiDetails = () => {
             }
           </div>
         </div>
-        <pre>
+{/*        <pre>
           {JSON.stringify(details, null, 2)}
-        </pre>
-        <div>
+        </pre>*/}
+        <div className="pb-5">
           {
             currentUser &&
             <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
@@ -70,11 +70,11 @@ const BooksApiDetails = () => {
 /*            <i onClick={() => {
               dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
             }} className="float-end bi bi-hand-thumbs-up me-2">
-            </i>*/}
+            </i>*/
           }
         </div>
-        <div>
-          <h2>People who like this book</h2>
+        <div className="card border-secondary mb-3">
+          <h2 className="card-header">People who like this book</h2>
           <ul className="list-group">
             {
                 likes.map((like) =>

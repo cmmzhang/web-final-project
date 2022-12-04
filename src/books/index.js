@@ -21,7 +21,7 @@ const Books = () => {
     }
     return (
         <>
-            <h1>The New York Times Books</h1>
+            <h1 className="fw-bold">The New York Times Books</h1>
             {
                 currentUser &&
                 <div>
@@ -33,9 +33,9 @@ const Books = () => {
             }
             {
                 currentUser &&
-                <div>
-                    <h3>My most recent like</h3>
-                    <div className="row">
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header"> My most recent like </h3>
+                    <div className="row card-body">
                         <div className="col">
                             {
                                 likes[count - 1] &&
@@ -51,9 +51,9 @@ const Books = () => {
             }
             {
                 !currentUser &&
-                <div>
-                    <h3>Most recent like</h3>
-                    <div className="row">
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header">Most recent like</h3>
+                    <div className="row card-body">
                         <div className="col">
                             {
                                 likes[count - 1] &&
