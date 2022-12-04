@@ -14,13 +14,15 @@ import Register from "./users/register";
 import Profile from "./users/profile";
 import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
+import followsReducer from "./follows/followers-reducer";
 
 const store = configureStore( {
     reducer: {
         books: booksReducer,
         booksapi: booksapiReducer,
         likes:likesReducer,
-        users: usersReducer
+        users: usersReducer,
+        follows: followsReducer
     }
 })
 
@@ -37,7 +39,8 @@ function App() {
                 <Route path="/users" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={
+                    <Profile />} />
               </Routes>
             </BrowserRouter>
           </CurrentUser>
