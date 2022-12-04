@@ -14,7 +14,9 @@ import Register from "./users/register";
 import Profile from "./users/profile";
 import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
-import BooksApiDetails from "./booksapi/booksapi-details";import ReviewsReducer from "./reviews/reviews-reducer";
+import BooksApiDetails from "./booksapi/booksapi-details";
+import ReviewsReducer from "./reviews/reviews-reducer";
+import followsReducer from "./follows/followers-reducer";
 
 const store = configureStore( {
     reducer: {
@@ -23,6 +25,7 @@ const store = configureStore( {
         likes:likesReducer,
         users: usersReducer,
         reviews: ReviewsReducer,
+        follows: followsReducer
     }
 })
 
@@ -40,7 +43,8 @@ function App() {
                 <Route path="/users" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={
+                    <Profile />} />
               </Routes>
             </BrowserRouter>
           </CurrentUser>

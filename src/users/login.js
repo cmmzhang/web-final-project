@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector, useNavigate} from "react-redux";
 import {loginThunk} from "./users-thunk";
 
 const Login = () => {
@@ -8,13 +8,14 @@ const Login = () => {
     const [validatePassword, setValidatePassword] = useState('alice123')
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { currentUser } = useSelector((state) => state.users)
     const handleLoginBtn = () => {
         if (password !== validatePassword) {
             setError('Passwords must match')
             return
         }
-        setError(null)
+        setError(null) 
         // const newUser = {
         //     username: username,
         //     password: password
@@ -23,6 +24,7 @@ const Login = () => {
             username, password
         }
         dispatch(loginThunk(loginUser))
+        navigate('/profile')
     }
     return (
         <>
