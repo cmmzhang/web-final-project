@@ -7,5 +7,6 @@ export const findBookBySearchTerm = async (term) => {
 
 export const findBookByBooksApiId = async (booksapiID) => {
     const response = await axios.get('https://api.nytimes.com/svc/books/v3/reviews.json?title='+ booksapiID +'&api-key=AMG29ubbk8l5MiCbhMtSkODIbIzCtDhG')
+    console.log(response.data.results.books)
     return response.data.results
 }

@@ -5,7 +5,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import booksapiReducer from "./booksapi/booksapi-reducer";
 import BooksApiSearch from "./booksapi/booksapi-search";
-import {likesReducer} from "./likes/likes-reducer";
+import likesReducer from "./likes/likes-reducer"
 import CurrentUser from "./users/current-user";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Navigation from "./navigation";
@@ -14,8 +14,11 @@ import Register from "./users/register";
 import Profile from "./users/profile";
 import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
-import ReviewsReducer from "./reviews/reviews-reducer";
+import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/followers-reducer";
 
 const store = configureStore( {
@@ -24,7 +27,6 @@ const store = configureStore( {
         booksapi: booksapiReducer,
         likes:likesReducer,
         users: usersReducer,
-        reviews: ReviewsReducer,
         follows: followsReducer
     }
 })
@@ -39,12 +41,12 @@ function App() {
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
-                <Route path="/details/:booksapiID" element={<BooksApiDetails />} />
+                <Route path="/details/:booksapiID" element={<BooksApiDetails/>}/>
                 <Route path="/users" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={
-                    <Profile />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:uid" element={<PublicProfile/>}/>
               </Routes>
             </BrowserRouter>
           </CurrentUser>

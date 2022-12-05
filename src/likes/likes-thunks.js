@@ -9,7 +9,7 @@ export const userLikesBookThunk = createAsyncThunk(
 )
 
 export const userUnlikesBookThunk = createAsyncThunk(
-    'userLikesBook',
+    'userUnlikesBook',
     async (like) => {
       return await userUnlikesBook(like.uid, like.bid)
     }

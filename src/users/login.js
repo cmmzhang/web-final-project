@@ -1,21 +1,22 @@
 import {useState} from "react";
-import {useDispatch, useSelector, useNavigate} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
+import {Navigate, useNavigate} from "react-router";
 
 const Login = () => {
     const [username, setUsername] = useState('alice')
     const [password, setPassword] = useState('alice123')
-    const [validatePassword, setValidatePassword] = useState('alice123')
+   /* const [validatePassword, setValidatePassword] = useState('alice123')*/
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { currentUser } = useSelector((state) => state.users)
-    const handleLoginBtn = () => {
+/*    const handleLoginBtn = () => {
         if (password !== validatePassword) {
             setError('Passwords must match')
             return
         }
-        setError(null) 
+        setError(null)
         // const newUser = {
         //     username: username,
         //     password: password
@@ -24,7 +25,20 @@ const Login = () => {
             username, password
         }
         dispatch(loginThunk(loginUser))
-        navigate('/profile')
+    }*/
+    const handleLoginBtn = () => {
+        try {
+            dispatch(loginThunk({username, password}))
+            // navigate('/profile')
+        } catch (e) {
+
+        }
+    }
+    if (currentUser) {
+        return (<Navigate to={'/profile'}/>)
+    }
+    if (currentUser) {
+        return (<Navigate to={'/profile'}/>)
     }
     return (
         <>

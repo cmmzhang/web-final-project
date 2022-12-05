@@ -1,9 +1,4 @@
-import {
-    createBooksThunk,
-    deleteBooksThunk,
-    findAllBooksThunk,
-    updateBooksThunk
-} from "./books-thunks";
+import {createBooksThunk, deleteBooksThunk, findAllBooksThunk,updateBooksThunk} from "./books-thunks";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {

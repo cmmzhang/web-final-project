@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk} from "./users-thunk";
+import {findUserByIdThunk, findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk} from "./users-thunk";
 
 const usersReducer = createSlice({
     name: 'users',
@@ -7,11 +7,15 @@ const usersReducer = createSlice({
         loading: false,
         users: [],
         currentUser: null,
-        error: null
+        error: null,
+        publicProfile: null
     },
     reducers: {
     },
     extraReducers: {
+        [findUserByIdThunk.fulfilled]: (state, action) => {
+            state.publicProfile = action.payload
+        },
         [findAllUsersThunk.fulfilled]: (state, action) => {
             state.users = action.payload
         },

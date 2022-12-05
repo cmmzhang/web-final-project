@@ -9,16 +9,11 @@ import {
 } from "./likes-thunks";
 
 const initialState = {
-  likes: [
-    {_id: 'like123', user: '111', book: '123'},
-    {_id: 'like234', user: '111', book: '234'},
-    {_id: 'like345', user: '222', book: '123'},
-    {_id: 'like456', user: '333', book: '234'},
-  ],
+  likes: [],
   loading: false
 }
 
-export const likesReducer = createSlice ({
+const likesReducer = createSlice ({
   name: 'likes',
   initialState,
   extraReducers: {
@@ -26,21 +21,24 @@ export const likesReducer = createSlice ({
       state.likes.push(action.payload)
     },
     [userUnlikesBookThunk.fulfilled]: (state, action) => {
-      state.likes = state.likes.filter((l) =>
-         l.user === action.payload.uid && l.book !== action.payload.bid
+      state.likes = state.likes.filter((like) =>
+         like.user === action.payload.uid && like.book !== action.payload.bid
       )
     },
     [findAllLikesThunk.fulfilled]: (state, action) => {
       state.likes = action.payload
     },
     [findBooksLikedByUserThunk.fulfilled]: (state, action) => {
-      const uid = state.likes.findIndex(like => like.user === action.payload._id)
-      state.likes[uid] = action.payload
+/*      const uid = state.likes.findIndex(like => like.user === action.payload.uid)
+      state.likes[uid] = action.payload*/
+      state.likes = action.payload
     },
     [findUsersWhoLikedBookThunk.fulfilled]: (state, action) => {
-      const bid = state.likes.findIndex(like => like.book === action.payload._id)
-      state.likes[bid] = action.payload
+/*      const bid = state.likes.findIndex(like => like.book === action.payload.bid)
+      state.likes[bid] = action.payload*/
+      state.likes = action.payload
     }
   }
 })
 
+export default likesReducer.reducer
