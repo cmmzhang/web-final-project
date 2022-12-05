@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
+import {Navigate} from "react-router";
 
 const Register = () => {
     const [username, setUsername] = useState('alice')
@@ -31,6 +32,9 @@ const Register = () => {
             username, password
         }
         dispatch(registerThunk(newUser))
+    }
+    if(currentUser) {
+      return (<Navigate to={'/profile'}/>)
     }
     return (
         <>

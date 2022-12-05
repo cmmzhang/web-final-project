@@ -19,13 +19,15 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
 import PublicProfile from "./users/public-profile";
+import followsReducer from "./follows/followers-reducer";
 
 const store = configureStore( {
     reducer: {
         books: booksReducer,
         booksapi: booksapiReducer,
         likes:likesReducer,
-        users: usersReducer
+        users: usersReducer,
+        follows: followsReducer
     }
 })
 

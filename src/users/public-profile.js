@@ -4,29 +4,36 @@ import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
 import {findBooksLikedByUserThunk} from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
-/*import {findFollowersThunk, findFollowingThunk, followUserThunk} from "../follows/follows-thunks";*/
+import {
+  findFollowersThunk,
+  findFollowingThunk,
+  followUsersThunk
+} from "../follows/follows-thunk";
 
 const PublicProfile = () => {
   const {uid} = useParams()
   const {publicProfile} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
+  const {followers, following} = useSelector((state) => state.follows)
   const dispatch = useDispatch()
-/*  const handleFollowBtn = () => {
-    dispatch(followUserThunk({
+  const handleFollowBtn = () => {
+    dispatch(followUsersThunk({
       followed: uid
     }))
-  }*/
+  }
   useEffect(() => {
     dispatch(findUserByIdThunk(uid))
     dispatch(findBooksLikedByUserThunk(uid))
+    dispatch(findFollowersThunk(uid))
+    dispatch(findFollowingThunk(uid))
   }, [uid])
   return(
       <>
-{/*        <button
+        <button
             onClick={handleFollowBtn}
             className="btn btn-success float-end">
           Follow
-        </button>*/}
+        </button>
         <h1>{publicProfile && publicProfile.username}</h1>
         <div>
           <h2>My likes</h2>
@@ -42,7 +49,7 @@ const PublicProfile = () => {
             }
           </ul>
         </div>
-{/*        <h2>Following</h2>
+        <h2>Following</h2>
         <div className="list-group">
           {
             following && following.map((follow) =>
@@ -61,7 +68,7 @@ const PublicProfile = () => {
                 </Link>
             )
           }
-        </div>*/}
+        </div>
       </>
   )
 }
