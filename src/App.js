@@ -44,7 +44,9 @@ function App() {
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
-                <Route path="/details/:booksapiID" element={<BooksApiDetails/>}/>
+                <Route exact
+                       strict
+                       sensitive={false} path="/details/:booksapiID" element={<BooksApiDetails/>}/>
                 <Route path="/users" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
