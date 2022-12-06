@@ -20,6 +20,7 @@ import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/followers-reducer";
+import ProtectedRoute from "./users/protected-route";
 
 const store = configureStore( {
     reducer: {
@@ -41,8 +42,14 @@ function App() {
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
-                <Route path="/details/:booksapiID" element={<BooksApiDetails/>}/>
-                <Route path="/users" element={<UserList />} />
+                <Route exact
+                       strict
+                       sensitive={false} path="/details/:booksapiID" element={<BooksApiDetails/>}/>
+                <Route path="/users" element={
+                  <ProtectedRoute>
+                    <UserList/>
+                  </ProtectedRoute>
+                }/>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />

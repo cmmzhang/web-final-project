@@ -3,7 +3,7 @@ import {
   findFollowersThunk,
   findFollowingThunk,
   followUsersThunk
-} from "./follows-thunk";
+} from "./follows-thunks";
 
 const followsReducer = createSlice({
   name: 'follows',
