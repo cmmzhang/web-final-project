@@ -14,14 +14,11 @@ import {
 
 } from "./reviews-thunks";
 
-const initialState = {
-    reviews: [],
-    // loading: true
-}
-
 export const ReviewsReducer = createSlice ({
     name: 'reviews',
-    initialState:initialState,
+    initialState: {
+        reviews: []
+    },
     extraReducers: {
         // [userReviewsBookThunk.fulfilled]: (state,action) => {
         //     console.log("state", state)

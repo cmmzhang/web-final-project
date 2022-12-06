@@ -20,6 +20,7 @@ import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/followers-reducer";
+import PublicProfile from './users/public-profile';
 
 const store = configureStore( {
     reducer: {

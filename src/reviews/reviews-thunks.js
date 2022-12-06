@@ -38,7 +38,7 @@ export const createReviewThunk = createAsyncThunk(
 )
 export const findReviewsByBookThunk = createAsyncThunk(
     'findReviewsByMovieThunk',
-    async (isbn13) => findReviewsByBook(isbn13)
+    async (booksapiID) => findReviewsByBook(booksapiID)
 
 )
 export const findReviewsByAuthorThunk = createAsyncThunk(

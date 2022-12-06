@@ -39,8 +39,8 @@ export const createReview = async (review) => {
     return response.data
 }
 
-export const findReviewsByBook = async (isbn13) => {
-    const response = await api.get(`${BOOK_REVIEWS_API}/${isbn13}/reviews`)
+export const findReviewsByBook = async (booksapiID) => {
+    const response = await api.get(`${BOOK_REVIEWS_API}/${booksapiID}/reviews`)
     return response.data
 }
 
