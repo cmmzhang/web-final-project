@@ -1,7 +1,8 @@
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
+import {createReviewThunk, findReviewsByBookThunk} from "../reviews/reviews-thunks";
 import {
   findAllLikesThunk,
   findUsersWhoLikedBookThunk,
@@ -16,10 +17,15 @@ const BooksApiDetails = () => {
   const {details} = useSelector((state) => state.booksapi)
   const {currentUser} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
+  const {reviews} = useSelector((state) => state.reviews)
+  console.log("reviews",{reviews})
+  console.log("likes",{likes})
+  const [review, setReview] = useState('')
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(findBookByBooksApiIdThunk(booksapiID))
     dispatch(findUsersWhoLikedBookThunk(booksapiID))
+    // dispatch(findReviewsByBookThunk(booksapiID))
   }, [])
   const likeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
@@ -35,6 +41,12 @@ const BooksApiDetails = () => {
         alert('You have not liked this book yet');
     }
   }
+  const handlePostReviewBtn = () => {
+    dispatch(createReviewThunk({
+        review,
+        booksapiID
+    }))
+}
   return (
       <>
         <h1>{booksapiID}</h1>
@@ -87,6 +99,33 @@ const BooksApiDetails = () => {
             }
           </ul>
         </div>
+        <div>
+        {
+                currentUser &&
+                <div>
+                    <textarea
+                        onChange={(e) => setReview(e.target.value)}
+                        className="form-control"></textarea>
+                    <button onClick={handlePostReviewBtn}>Post Review</button>
+                </div>
+            }
+          <div className="card border-secondary mb-3">
+          <h2 className="card-header">Related book reviews</h2>
+            <ul className="list-group">
+                {
+                    reviews.map((review) =>
+                        <li className="list-group-item">
+                            {review.review}
+                            <Link to={`/profile/${review.author._id}`}>
+                                {review.author.username}
+                            </Link>
+
+                        </li>
+                    )
+                }
+            </ul>
+          </div>
+          </div>
 
       </>
   )

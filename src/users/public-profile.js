@@ -1,9 +1,10 @@
 import {useParams} from "react-router";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {findUserByIdThunk} from "./users-thunk";
 import {followUsersThunk, findFollowersThunk, findFollowingThunk} from "../follows/follows-thunks";
 import { findReviewsByAuthorThunk } from "../reviews/reviews-thunks";
-// import {findUserByIdThunk} 
+import {Link} from "react-router-dom";
 const PublicProfile = () => {
     const {uid} = useParams()
     const {publicProfile} = useSelector((state) => state.publicProfile)
