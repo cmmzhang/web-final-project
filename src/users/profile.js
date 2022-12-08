@@ -1,11 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {logoutThunk} from "./users-thunk";
+import {useNavigate} from "react-router-dom";
+import {Navigate} from "react-router";
+
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.users)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const handleLogout = () => {
+  const handleLogoutBtn = () => {
     dispatch(logoutThunk())
+    navigate('/login')
+  }
+  if (!currentUser) {
+        return (<Navigate to={'/login'}/>)
   }
   return (
       <>
@@ -16,7 +24,7 @@ const Profile = () => {
 
         }
 
-        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+        <button className="btn btn-danger" onClick={handleLogoutBtn}>Logout</button>
       </>
 
   )
