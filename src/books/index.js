@@ -21,7 +21,10 @@ const Books = () => {
     }
     return (
         <>
-            <h1 className="fw-bold">The New York Times Books</h1>
+            <h1 className="fw-bold">
+                Bookwarms - The New York Times Books
+            </h1>
+            <img src={require("./landingpageimage.png")} width="100%px" height="400px"/>
             {
                 currentUser &&
                 <div>
@@ -73,6 +76,12 @@ const Books = () => {
                     </div>
                 </div>
             }
+            <div className="card border-secondary mb-3">
+                <h3 className="card-header">About</h3>
+                <div className="row card-body">
+                    <p>Bookwarms web app helps readers search information about book reviews, and customize book reading lists. </p>
+                </div>
+            </div>
         </>
     )
 }

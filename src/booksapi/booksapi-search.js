@@ -14,7 +14,7 @@ const BooksApiSearch = () => {
   }, [])
   return(
       <>
-        <h1>BooksApi Search</h1>
+        <h1>The New York Times Best Sellers</h1>
         <input
             onChange={(e) => {
               setSearchTerm(e.target.value)
