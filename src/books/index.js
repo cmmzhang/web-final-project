@@ -33,7 +33,10 @@ const Books = () => {
             <h1 className="fw-bold">
                 Bookwarms - The New York Times Books
             </h1>
+
+
             <img src={require("./landingpageimage.png")} width="100%px" height="400px"/>
+
             {
                 currentUser &&
                 <div>
@@ -88,6 +91,49 @@ const Books = () => {
                     </div>
                 </div>
             }
+
+            {
+                currentUser &&
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header"> My most recent review</h3>
+                    <div className="row card-body">
+                        <div className="col">
+                            {
+                                reviews[reviews_count-1] &&
+                                <div>
+                                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                                        {reviews[reviews_count-1].booksapiID}
+                                    </Link>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            } 
+            {
+                !currentUser &&
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header">Most recent Review</h3>
+                    <div className="row card-body">
+                        <div className="col">
+                            {
+                                reviews[reviews_count-1] &&
+                                <div>
+                                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                                        {reviews[reviews_count-1].booksapiID}
+                                    </Link>
+                                    <span>
+                                        &nbsp;is reviewed by User&nbsp;
+                                    </span>
+                                    <Link to={`/profile/${reviews[reviews_count-1].author}`}>
+                                        {reviews[reviews_count-1].author}
+                                    </Link>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            } 
         </>
     )
 }
