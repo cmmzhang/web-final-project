@@ -4,6 +4,7 @@ import {
     findAllLikesThunk, findBooksLikedByUserThunk
 } from "../likes/likes-thunks";
 import {findUserByIdThunk} from "../users/users-thunk";
+import {findReviewsByAuthorThunk, findAllReviewsThunk} from "../reviews/reviews-thunks";
 import {Link} from "react-router-dom";
 
 
@@ -11,26 +12,43 @@ import {Link} from "react-router-dom";
 const Books = () => {
     const {currentUser} = useSelector((state) => state.users)
     const {likes} = useSelector((state) => state.likes)
+    const {reviews} = useSelector((state) => state.reviews)
+    const reviews_count = reviews.length
     const count = likes.length
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findAllLikesThunk())
+        dispatch(findAllReviewsThunk())
     }, [])
-    const personalLike = (uid) => {
-        dispatch(findBooksLikedByUserThunk(uid))
-    }
+    console.log("{{likes}}", {likes})
+    console.log("{reviews}", {reviews})
+    useEffect(() => {
+        if(currentUser && currentUser._id) {
+            dispatch(findBooksLikedByUserThunk(currentUser._id))
+            dispatch(findReviewsByAuthorThunk(currentUser._id))
+        } 
+    }, [currentUser])
     return (
         <>
-            <h1 className="fw-bold">The New York Times Books</h1>
+            <h1 className="fw-bold">
+                Bookwarms - The New York Times Books
+            </h1>
+
+
+            {/* <img src={require("./landingpageimage.png")} width="100%px" height="400px"/> */}
+
             {
                 currentUser &&
                 <div>
                     <h2>Welcome {currentUser.username} </h2>
                 </div>
             }
-            {
-                currentUser && personalLike(currentUser._id)
-            }
+            <div className="card border-secondary mb-3">
+                <h3 className="card-header">About</h3>
+                <div className="row card-body">
+                    <p>Bookwarms web app helps readers search information about book reviews, and customize book reading lists. </p>
+                </div>
+            </div>
             {
                 currentUser &&
                 <div className="card border-secondary mb-3">
@@ -73,6 +91,49 @@ const Books = () => {
                     </div>
                 </div>
             }
+
+            {
+                currentUser &&
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header"> My most recent review</h3>
+                    <div className="row card-body">
+                        <div className="col">
+                            {
+                                reviews[reviews_count-1] &&
+                                <div>
+                                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                                        {reviews[reviews_count-1].booksapiID}
+                                    </Link>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            } 
+            {
+                !currentUser &&
+                <div className="card border-secondary mb-3">
+                    <h3 className="card-header">Most recent Review</h3>
+                    <div className="row card-body">
+                        <div className="col">
+                            {
+                                reviews[reviews_count-1] &&
+                                <div>
+                                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                                        {reviews[reviews_count-1].booksapiID}
+                                    </Link>
+                                    <span>
+                                        &nbsp;is reviewed by User&nbsp;
+                                    </span>
+                                    <Link to={`/profile/${reviews[reviews_count-1].author}`}>
+                                        {reviews[reviews_count-1].author}
+                                    </Link>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            } 
         </>
     )
 }

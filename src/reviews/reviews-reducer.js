@@ -3,31 +3,31 @@ import {
     createReviewThunk,
     findReviewsByBookThunk,
     findReviewsByAuthorThunk,
+    findAllReviewsThunk,
 
 } from "./reviews-thunks";
-
-const initialState = {
-    reviews: [],
-    loading: false
-  }
-  
 
 
 export const ReviewsReducer = createSlice ({
     name: 'reviews',
-    initialState: initialState,
+    initialState: {
+        reviews: []
+      },
     extraReducers: {
         [createReviewThunk.fulfilled]: (state, action) => {
             state.reviews.push(action.payload)
-            console.log("action.payload", action.payload)
-            console.log("state", state)
-            console.log("reviews in reducer", state.reviews)
         },
         [findReviewsByBookThunk.fulfilled]: (state, action) => {
+            // console.log("findReviewsByBookThunk action.payload", action.payload)
             state.reviews = action.payload
+            // console.log("findReviewsByBookThunk reviews in reducer", state.reviews)
         },
         [findReviewsByAuthorThunk.fulfilled]: (state, action) => {
-            state.reviews = action.payload}
+            state.reviews = action.payload
+        },
+        [findAllReviewsThunk.fulfilled]: (state, action) => {
+            state.reviews = action.payload
+        }
     }}
 )
 

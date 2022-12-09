@@ -2,13 +2,16 @@ import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect,useState} from "react";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
+
 import {createReviewThunk, findReviewsByBookThunk} from "../reviews/reviews-thunks";
+
 import {
   findAllLikesThunk,
   findUsersWhoLikedBookThunk,
   userLikesBookThunk,
   userUnlikesBookThunk
 } from "../likes/likes-thunks";
+
 import {Link} from "react-router-dom";
 
 
@@ -22,11 +25,13 @@ const BooksApiDetails = () => {
   console.log("likes",{likes})
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(findBookByBooksApiIdThunk(booksapiID))
     dispatch(findUsersWhoLikedBookThunk(booksapiID))
-    // dispatch(findReviewsByBookThunk(booksapiID))
+    dispatch(findReviewsByBookThunk(booksapiID))
   }, [])
+
   const likeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
       dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
@@ -116,7 +121,7 @@ const BooksApiDetails = () => {
                     reviews.map((review) =>
                         <li className="list-group-item">
                             {review.review}
-                            <Link to={`/profile/${review.author._id}`}>
+                            <Link to={`/profile/${review.author._id}`} className="float-end">
                                 {review.author.username}
                             </Link>
 
