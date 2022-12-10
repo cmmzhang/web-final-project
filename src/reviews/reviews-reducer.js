@@ -4,6 +4,7 @@ import {
     findReviewsByBookThunk,
     findReviewsByAuthorThunk,
     findAllReviewsThunk,
+    deleteReviewThunk
 
 } from "./reviews-thunks";
 
@@ -27,6 +28,9 @@ export const ReviewsReducer = createSlice ({
         },
         [findAllReviewsThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload
+        },
+        [deleteReviewThunk.fulfilled]:(state, action) => {
+            state.reviews = action.payload 
         }
     }}
 )

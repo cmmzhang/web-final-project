@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect,useState} from "react";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
 
-import {createReviewThunk, findReviewsByBookThunk} from "../reviews/reviews-thunks";
+import {createReviewThunk, findReviewsByBookThunk, deleteReviewThunk} from "../reviews/reviews-thunks";
 
 import {
   findAllLikesThunk,
@@ -51,7 +51,15 @@ const BooksApiDetails = () => {
         review,
         booksapiID
     }))
-}
+  }
+  const DeleteReviewBtn = () => {
+    dispatch(deleteReviewThunk({
+        currentUser,
+        booksapiID
+    }))
+  }
+
+
   return (
       <>
         <h1>{booksapiID}</h1>
@@ -124,6 +132,7 @@ const BooksApiDetails = () => {
                             <Link to={`/profile/${review.author._id}`} className="float-end">
                                 {review.author.username}
                             </Link>
+                            <button onClick={DeleteReviewBtn}>delete Review</button>
 
                         </li>
                     )

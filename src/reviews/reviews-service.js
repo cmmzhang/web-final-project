@@ -31,3 +31,7 @@ export const findAllReviews = async () => {
     console.log("findAllReviews", response)
     return response.data
 }
+
+export const deleteReview = async(author, booksapiID) => {
+    const response = await api.delete(`${AUTHOR_REVIEWS_API}/${author}/books/${booksapiID}`)
+}
