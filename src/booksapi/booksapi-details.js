@@ -22,18 +22,20 @@ const BooksApiDetails = () => {
   const {reviews} = useSelector((state) => state.reviews)
   console.log("reviews",{reviews})
   console.log("likes",{likes})
+  const [rerender, setRerender] = useState(true);
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(findBookByBooksApiIdThunk(booksapiID))
-    dispatch(findUsersWhoLikedBookThunk(booksapiID))
-    dispatch(findReviewsByBookThunk(booksapiID))
+      dispatch(findBookByBooksApiIdThunk(booksapiID))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
+      dispatch(findReviewsByBookThunk(booksapiID))
   }, [])
 
   const likeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
       dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
     } else {
       alert('You have already liked this book');
     }
@@ -42,6 +44,7 @@ const BooksApiDetails = () => {
   const UnlikeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length !== 0) {
       dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
     } else {
       alert('You have not liked this book yet');
     }
