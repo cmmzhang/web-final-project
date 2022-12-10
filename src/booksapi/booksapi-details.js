@@ -85,11 +85,11 @@ const BooksApiDetails = () => {
         <div className="pb-5">
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
           }
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
           }
           {
             currentUser &&

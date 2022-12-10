@@ -41,7 +41,7 @@ function App() {
         <Provider store={store}>
           <CurrentUser>
             <BrowserRouter>
-              <Navigation />
+              <Navigation/>
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
