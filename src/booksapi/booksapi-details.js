@@ -21,8 +21,6 @@ const BooksApiDetails = () => {
   const {currentUser} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
   const {reviews} = useSelector((state) => state.reviews)
-  console.log("reviews",{reviews})
-  console.log("likes",{likes})
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
 
@@ -46,6 +44,11 @@ const BooksApiDetails = () => {
         alert('You have not liked this book yet');
     }
   }
+
+  const alertLogin = () => {
+    alert('Warning: Please log in first');
+  }
+
   const handlePostReviewBtn = () => {
     dispatch(createReviewThunk({
         review,
@@ -59,6 +62,10 @@ const BooksApiDetails = () => {
     }))
   }
 
+  console.log("booksapiID", booksapiID)
+  const length = likes.length
+  // console.log("likes", likes)
+  // console.log("likes username", likes[length-1]?.user?.username)
 
   return (
       <>
@@ -77,34 +84,37 @@ const BooksApiDetails = () => {
             }
           </div>
         </div>
-{/*        <pre>
-          {JSON.stringify(details, null, 2)}
-        </pre>*/}
+
         <div className="pb-5">
           {
-            currentUser &&
-            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
-/*            <i onClick={() => {
-              dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-down me-2">
-            </i>*/
+            !currentUser &&
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+          }
+          {
+            !currentUser &&
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
           }
           {
             currentUser &&
-            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
-/*            <i onClick={() => {
-              dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-up me-2">
-            </i>*/
+            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+
+          }
+          {
+            currentUser &&
+            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
+            /*            <i onClick={() => {
+                          dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+                        }} className="float-end bi bi-hand-thumbs-up me-2">
+                        </i>*/
           }
         </div>
         <div className="card border-secondary mb-3">
           <h2 className="card-header">People who like this book</h2>
           <ul className="list-group">
             {
-                likes.map((like) =>
+                likes && likes.map((like) =>
                 <li className="list-group-item" key={like._id}>
-                  <Link to={`/profile/${like.user._id}`}>
+                  <Link to={`/profile/${like._id}`}>
                     {like.user.username}
                   </Link>
                 </li>
@@ -113,6 +123,15 @@ const BooksApiDetails = () => {
           </ul>
         </div>
         <div>
+        {
+            !currentUser &&
+            <div>
+                    <textarea
+                        onChange={(e) => setReview(e.target.value)}
+                        className="form-control"></textarea>
+              <button onClick={() => {alertLogin()}}>Post Review</button>
+            </div>
+          }
         {
                 currentUser &&
                 <div>
@@ -126,14 +145,13 @@ const BooksApiDetails = () => {
           <h2 className="card-header">Related book reviews</h2>
             <ul className="list-group">
                 {
-                    reviews.map((review) =>
-                        <li className="list-group-item">
+                    reviews.map((review, index) =>
+                        <li className="list-group-item" key={index}>
                             {review.review}
                             <Link to={`/profile/${review.author._id}`} className="float-end">
                                 {review.author.username}
                             </Link>
                             <button onClick={DeleteReviewBtn}>delete Review</button>
-
                         </li>
                     )
                 }

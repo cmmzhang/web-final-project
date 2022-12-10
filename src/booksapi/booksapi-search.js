@@ -6,8 +6,9 @@ import {userLikesBookThunk} from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
 
 const BooksApiSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('Java')
+  const [searchTerm, setSearchTerm] = useState('becoming')
   const {books, loading} = useSelector((state) => state.booksapi)
+  console.log("books", books)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(findBookBySearchTermThunk(searchTerm))
@@ -26,7 +27,7 @@ const BooksApiSearch = () => {
         <ul>
           {
             books.map((book) =>
-                <li key={book.booksapiID}>
+                <li key={book.book_title}>
                   <Link to={`/details/${book.book_title}`}>
                     {book.book_title}
                   </Link>

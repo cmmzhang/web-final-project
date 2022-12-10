@@ -20,14 +20,27 @@ const Books = () => {
         dispatch(findAllLikesThunk())
         dispatch(findAllReviewsThunk())
     }, [])
-    console.log("{{likes}}", {likes})
-    console.log("{reviews}", {reviews})
+
     useEffect(() => {
         if(currentUser && currentUser._id) {
             dispatch(findBooksLikedByUserThunk(currentUser._id))
             dispatch(findReviewsByAuthorThunk(currentUser._id))
         } 
     }, [currentUser])
+
+    console.log("likes",likes )
+    console.log("reviews",reviews )
+
+    const author_name=  reviews[reviews_count-1]?.author
+
+    // console.log("author_name", author_name)
+    // 638ef27b2fa52f4c2da28fd1
+
+    // console.log("like",likes[count - 1]?.user)
+    // reviews[reviews_count-1] && reviews[reviews_count-1]?.author
+
+
+
     return (
         <>
             <h1 className="fw-bold">
@@ -85,6 +98,9 @@ const Books = () => {
                                     <Link to={`/profile/${likes[count - 1].user}`}>
                                         {likes[count - 1].user}
                                     </Link>
+                                    {/* <Link to={`/profile/${likes[count - 1].user._id}`}>
+                                        {likes[count - 1]?.user}
+                                    </Link> */}
                                 </div>
                             }
                         </div>
@@ -128,12 +144,16 @@ const Books = () => {
                                     <Link to={`/profile/${reviews[reviews_count-1].author}`}>
                                         {reviews[reviews_count-1].author}
                                     </Link>
+
+                                    {/* <Link to={`/profile/${author_name}`}>
+                                        {author_name }
+                                    </Link> */}
                                 </div>
                             }
                         </div>
                     </div>
                 </div>
-            } 
+            }
         </>
     )
 }

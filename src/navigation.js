@@ -26,8 +26,8 @@ const Navigation = () => {
             </Link>
           </li>
             {
-                screens.map((screen) =>
-                    <li className="nav-item">
+                screens.map((screen,index) =>
+                    <li className="nav-item" key={index} >
                         <Link to={`/${screen}`}
                                 className={`nav-link ${parts[1] === screen?'active':''}`}>
                                     <span className="text-capitalize">{screen}</span>
