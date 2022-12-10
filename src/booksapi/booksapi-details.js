@@ -35,23 +35,30 @@ const BooksApiDetails = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
       dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
     } else {
-        alert('You have already liked this book');
+      alert('You have already liked this book');
     }
   }
+
   const UnlikeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length !== 0) {
       dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
     } else {
-        alert('You have not liked this book yet');
+      alert('You have not liked this book yet');
     }
   }
+
+  const alertLogin = () => {
+    alert('Warning: Please log in first');
+  }
+
   const handlePostReviewBtn = () => {
     dispatch(createReviewThunk({
-        review,
-        booksapiID
+      review,
+      booksapiID
     }))
-}
-  return (
+  }
+
+  return(
       <>
         <h1>{booksapiID}</h1>
         {currentUser && <h2>{currentUser.username}</h2>}
@@ -68,70 +75,87 @@ const BooksApiDetails = () => {
             }
           </div>
         </div>
-{/*        <pre>
+        {/*        <pre>
           {JSON.stringify(details, null, 2)}
         </pre>*/}
+
         <div className="pb-5">
+          {
+            !currentUser &&
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+          }
+          {
+            !currentUser &&
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+          }
           {
             currentUser &&
             <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
-/*            <i onClick={() => {
-              dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-down me-2">
-            </i>*/
+            /*            <i onClick={() => {
+                          dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+                        }} className="float-end bi bi-hand-thumbs-down me-2">
+                        </i>*/
           }
           {
             currentUser &&
             <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
-/*            <i onClick={() => {
-              dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
-            }} className="float-end bi bi-hand-thumbs-up me-2">
-            </i>*/
+            /*            <i onClick={() => {
+                          dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+                        }} className="float-end bi bi-hand-thumbs-up me-2">
+                        </i>*/
           }
         </div>
         <div className="card border-secondary mb-3">
           <h2 className="card-header">People who like this book</h2>
           <ul className="list-group">
             {
-                likes && likes.map((like) =>
-                <li className="list-group-item" key={like._id}>
-                  <Link to={`/profile/${like.user._id}`}>
-                    {like.user.username}
-                  </Link>
-                </li>
+              likes && likes.map((like) =>
+                  <li className="list-group-item" key={like._id}>
+                    <Link to={`/profile/${like.user._id}`}>
+                      {like.user.username}
+                    </Link>
+                  </li>
               )
             }
           </ul>
         </div>
 
         <div>
-        {
-                currentUser &&
-                <div>
+          {
+            !currentUser &&
+            <div>
                     <textarea
                         onChange={(e) => setReview(e.target.value)}
                         className="form-control"></textarea>
-                    <button onClick={handlePostReviewBtn}>Post Review</button>
-                </div>
-            }
-          <div className="card border-secondary mb-3">
-          <h2 className="card-header">Related book reviews</h2>
-            <ul className="list-group">
+              <button onClick={() => {alertLogin()}}>Post Review</button>
+            </div>
+          }
+          {
+            currentUser &&
+            <div>
+                    <textarea
+                        onChange={(e) => setReview(e.target.value)}
+                        className="form-control"></textarea>
+              <button onClick={handlePostReviewBtn}>Post Review</button>
+            </div>
+          }
+            <div className="card border-secondary mb-3">
+              <h2 className="card-header">Related book reviews</h2>
+              <ul className="list-group">
                 {
-                    reviews.map((review) =>
-                        <li className="list-group-item">
-                            {review.review}
-                            <Link to={`/profile/${review.author._id}`} className="float-end">
-                                {review.author.username}
-                            </Link>
+                  reviews.map((review) =>
+                      <li className="list-group-item">
+                        {review.review}
+                        <Link to={`/profile/${review.author._id}`} className="float-end">
+                          {review.author.username}
+                        </Link>
 
-                        </li>
-                    )
+                      </li>
+                  )
                 }
-            </ul>
-          </div>
-          </div>
-
+              </ul>
+            </div>
+        </div>
       </>
   )
 }
