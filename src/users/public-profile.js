@@ -8,7 +8,7 @@ import {
   findFollowersThunk,
   findFollowingThunk,
   followUsersThunk
-} from "../follows/follows-thunks";
+} from "../follows/follows-thunk";
 
 const PublicProfile = () => {
   const {uid} = useParams()
