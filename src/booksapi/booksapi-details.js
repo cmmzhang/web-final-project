@@ -13,6 +13,7 @@ import {
 } from "../likes/likes-thunks";
 
 import {Link} from "react-router-dom";
+import "./index.css";
 
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
@@ -85,15 +86,15 @@ const BooksApiDetails = () => {
         <div className="pb-5">
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down wd-enlarge me-2"></i>
           }
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
           }
           {
             currentUser &&
-            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down wd-enlarge me-2"></i>
             /*            <i onClick={() => {
                           dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
                         }} className="float-end bi bi-hand-thumbs-down me-2">
@@ -101,7 +102,7 @@ const BooksApiDetails = () => {
           }
           {
             currentUser &&
-            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
             /*            <i onClick={() => {
                           dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
                         }} className="float-end bi bi-hand-thumbs-up me-2">
