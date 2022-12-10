@@ -31,7 +31,7 @@ const BooksApiDetails = () => {
       dispatch(findBookByBooksApiIdThunk(booksapiID))
       dispatch(findUsersWhoLikedBookThunk(booksapiID))
       dispatch(findReviewsByBookThunk(booksapiID))
-  }, [])
+  }, [likes, reviews])
 
   const likeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
