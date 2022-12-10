@@ -19,9 +19,9 @@ export const findAllUsers = async () => {
     return users
 }
 
-
 export const register = async (user) => {
     const response = await api.post(`${BASE_URL}/register`, user);
+    console.log(response.data);
     return response.data
 }
 
@@ -41,5 +41,6 @@ export const logout = async () => {
 }
 export const deleteUser = async (uid) => { }
 export const updateUser = async (uid, userUpdates) => {
-
+    const response = await api.post(`${USER_API_URL}/${uid}`, userUpdates);
+    return response.data
 }

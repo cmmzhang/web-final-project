@@ -12,14 +12,19 @@ import {
 
 const PublicProfile = () => {
   const {uid} = useParams()
-  const {publicProfile} = useSelector((state) => state.users)
+  const {publicProfile, currentUser} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
   const {followers, following} = useSelector((state) => state.follows)
   const dispatch = useDispatch()
+
   const handleFollowBtn = () => {
-    dispatch(followUsersThunk({
-      followed: uid
-    }))
+      if (followers.filter((follow) => follow.follower._id === currentUser._id).length === 0) {
+          dispatch(followUsersThunk({
+              followed: uid
+          }))
+      } else {
+          alert('You have already followed this user')
+      }
   }
   useEffect(() => {
     dispatch(findUserByIdThunk(uid))
@@ -35,6 +40,11 @@ const PublicProfile = () => {
           Follow
         </button>
         <h1>{publicProfile && publicProfile.username}</h1>
+        <div>{publicProfile && publicProfile.firstName}</div>
+        <div>{publicProfile && publicProfile.lastName}</div>
+        <div>{publicProfile && publicProfile.emailVisible === 'Visible in the public profile' && publicProfile.email}</div>
+        <div>{publicProfile && publicProfile.phoneVisible === 'Visible in the public profile' && publicProfile.phone}</div>
+        <div>{publicProfile && publicProfile.dobVisible === 'Visible in the public profile' && publicProfile.dob}</div>
         <div>
           <h2>My likes</h2>
           <ul className="list-group">

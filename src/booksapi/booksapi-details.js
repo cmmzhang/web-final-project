@@ -14,7 +14,6 @@ import {
 
 import {Link} from "react-router-dom";
 
-
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
   const {details} = useSelector((state) => state.booksapi)
@@ -94,7 +93,7 @@ const BooksApiDetails = () => {
           <h2 className="card-header">People who like this book</h2>
           <ul className="list-group">
             {
-                likes.map((like) =>
+                likes && likes.map((like) =>
                 <li className="list-group-item" key={like._id}>
                   <Link to={`/profile/${like.user._id}`}>
                     {like.user.username}
@@ -104,6 +103,7 @@ const BooksApiDetails = () => {
             }
           </ul>
         </div>
+
         <div>
         {
                 currentUser &&
