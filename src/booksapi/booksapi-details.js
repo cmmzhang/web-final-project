@@ -114,11 +114,15 @@ const BooksApiDetails = () => {
           <ul className="list-group">
             {
               likes && likes.map((like) =>
-                  <li className="list-group-item" key={like._id}>
-                    <Link to={`/profile/${like.user._id}`}>
-                      {like.user.username}
-                    </Link>
-                  </li>
+                  <>
+                    {like.user &&
+                    <li className="list-group-item" key={like._id}>
+                      <Link to={`/profile/${like.user._id}`}>
+                        {like.user.username}
+                      </Link>
+                    </li>
+                    }
+                  </>
               )
             }
           </ul>
