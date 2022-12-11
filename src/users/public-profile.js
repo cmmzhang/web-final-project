@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
 import {findBooksLikedByUserThunk} from "../likes/likes-thunks";
+import { findReviewsByAuthorThunk } from "../reviews/reviews-thunks";
 import {Link} from "react-router-dom";
 import {
   findFollowersThunk,
@@ -14,6 +15,7 @@ const PublicProfile = () => {
   const {uid} = useParams()
   const {publicProfile, currentUser} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
+  const {reviews} = useSelector((state) => state.reviews)
   const {followers, following} = useSelector((state) => state.follows)
   const dispatch = useDispatch()
 
@@ -29,6 +31,7 @@ const PublicProfile = () => {
   useEffect(() => {
     dispatch(findUserByIdThunk(uid))
     dispatch(findBooksLikedByUserThunk(uid))
+    dispatch(findReviewsByAuthorThunk(uid))
     dispatch(findFollowersThunk(uid))
     dispatch(findFollowingThunk(uid))
   }, [uid])
@@ -54,6 +57,25 @@ const PublicProfile = () => {
                     <Link to={`/details/${like.book}`}>
                       {like.book}
                     </Link>
+                  </li>
+              )
+            }
+          </ul>
+        </div>
+        <div>
+          <h2>My reviews</h2>
+          <ul className="list-group">
+            {
+              reviews.map((review) =>
+                  <li key={review._id} className="list-group-item">
+                    <span>book title:</span>
+                    <Link to={`/details/${review.booksapiID}`}>
+                      {review.booksapiID}
+                    </Link>
+                    <div>
+                    <span>review content: </span>
+                    <span>{review.review}</span>
+                    </div>
                   </li>
               )
             }
