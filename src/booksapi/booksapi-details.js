@@ -122,14 +122,15 @@ const BooksApiDetails = () => {
           <h2 className="card-header">People who like this book</h2>
           <ul className="list-group">
             {
-                likes && likes.map((like) => 
+              likes && likes.map((like) =>
                 <>
-                {like.user && 
-                <li className="list-group-item" key={like._id}>
-                  <Link to={`/profile/${like.user._id}`}>
-                    {like.user.username}
-                  </Link>
-                </li>}
+                  {like.user &&
+                  <li className="list-group-item" key={like._id}>
+                    <Link to={`/profile/${like.user._id}`}>
+                      {like.user.username}
+                    </Link>
+                  </li>
+                  }
                 </>
               )
             }
