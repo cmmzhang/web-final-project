@@ -37,11 +37,12 @@ const PublicProfile = () => {
   }, [uid])
   return(
       <>
-        <button
-            onClick={handleFollowBtn}
-            className="btn btn-success float-end">
-          Follow
-        </button>
+          {currentUser && <button
+              onClick={handleFollowBtn}
+              className="btn btn-success float-end">
+              Follow
+          </button>
+          }
         <h1>{publicProfile && publicProfile.username}</h1>
         <div>{publicProfile && publicProfile.firstName}</div>
         <div>{publicProfile && publicProfile.lastName}</div>
@@ -85,9 +86,11 @@ const PublicProfile = () => {
         <div className="list-group">
           {
             following && following.map((follow) =>
-                <Link to={`/profile/${follow.followed._id}`} className="list-group-item">
-                  {follow.followed.username}
-                </Link>
+                <li className="list-group-item">
+                    <Link to={`/profile/${follow.followed._id}`}>
+                        {follow.followed.username}
+                    </Link>
+                </li>
             )
           }
         </div>
@@ -95,9 +98,11 @@ const PublicProfile = () => {
         <div className="list-group">
           {
             followers && followers.map((follow) =>
-                <Link to={`/profile/${follow.follower._id}`} className="list-group-item">
-                  {follow.follower.username}
-                </Link>
+                <li className="list-group-item">
+                    <Link to={`/profile/${follow.follower._id}`}>
+                        {follow.follower.username}
+                    </Link>
+                </li>
             )
           }
         </div>
