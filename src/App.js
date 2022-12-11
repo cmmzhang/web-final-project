@@ -19,8 +19,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './vendor/bootstrap.min.css';
 import BooksApiDetails from "./booksapi/booksapi-details";
 import PublicProfile from "./users/public-profile";
-import followsReducer from "./follows/followers-reducer";
 import ReviewsReducer from "./reviews/reviews-reducer";
+import EditProfile from "./users/edit-profile";
+import followsReducer from "./follows/follows-reducer";
 
 
 const store = configureStore( {
@@ -40,7 +41,7 @@ function App() {
         <Provider store={store}>
           <CurrentUser>
             <BrowserRouter>
-              <Navigation />
+              <Navigation/>
               <Routes>
                 <Route index element={<Books />} />
                 <Route path="/search" element={<BooksApiSearch />} />
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:uid" element={<PublicProfile/>}/>
+                <Route path="/editprofile/:uid" element={<EditProfile/>}/>
               </Routes>
             </BrowserRouter>
           </CurrentUser>

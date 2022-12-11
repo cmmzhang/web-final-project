@@ -13,7 +13,7 @@ import {
 } from "../likes/likes-thunks";
 
 import {Link} from "react-router-dom";
-
+import "./index.css";
 
 const BooksApiDetails = () => {
   const {booksapiID} = useParams()
@@ -22,27 +22,33 @@ const BooksApiDetails = () => {
   const {likes} = useSelector((state) => state.likes)
   
   const {reviews} = useSelector((state) => state.reviews)
+  console.log("reviews",{reviews})
+  console.log("likes",{likes})
+  const [rerender, setRerender] = useState(true);
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(findBookByBooksApiIdThunk(booksapiID))
-    dispatch(findUsersWhoLikedBookThunk(booksapiID))
-    dispatch(findReviewsByBookThunk(booksapiID))
-  }, [])
+      dispatch(findBookByBooksApiIdThunk(booksapiID))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
+      dispatch(findReviewsByBookThunk(booksapiID))
+  }, [likes, reviews])
 
   const likeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length === 0) {
       dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
     } else {
-        alert('You have already liked this book');
+      alert('You have already liked this book');
     }
   }
+
   const UnlikeBook = () => {
     if (likes.filter((like) => like.user._id === currentUser._id).length !== 0) {
       dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+      dispatch(findUsersWhoLikedBookThunk(booksapiID))
     } else {
-        alert('You have not liked this book yet');
+      alert('You have not liked this book yet');
     }
   }
 
@@ -52,8 +58,8 @@ const BooksApiDetails = () => {
 
   const handlePostReviewBtn = () => {
     dispatch(createReviewThunk({
-        review,
-        booksapiID
+      review,
+      booksapiID
     }))
   }
   // const DeleteReviewBtn = () => {
@@ -96,19 +102,27 @@ const BooksApiDetails = () => {
         <div className="pb-5">
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down wd-enlarge me-2"></i>
           }
           {
             !currentUser &&
-            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
+            <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
           }
           {
             currentUser &&
-            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down me-2"></i>
-
+            <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down wd-enlarge me-2"></i>
+            /*            <i onClick={() => {
+                          dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+                        }} className="float-end bi bi-hand-thumbs-down me-2">
+                        </i>*/
           }
           {
             currentUser &&
+            <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
+            /*            <i onClick={() => {
+                          dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
+                        }} className="float-end bi bi-hand-thumbs-up me-2">
+                        </i>*/
             <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
             /*            <i onClick={() => {
                           dispatch(userLikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
@@ -130,6 +144,7 @@ const BooksApiDetails = () => {
             }
           </ul>
         </div>
+
         <div>
         {
             !currentUser &&
@@ -171,10 +186,9 @@ const BooksApiDetails = () => {
                         </li>
                     )
                 }
-            </ul>
-          </div>
-          </div>
-
+              </ul>
+            </div>
+        </div>
       </>
   )
 }

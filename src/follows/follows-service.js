@@ -5,7 +5,7 @@ const USERS_API = 'http://localhost:4000/users'
 
 const api = axios.create({withCredentials: true});
 export const followUser = async (follow) => {
-    const response = api.post(`${FOLLOWS_API}`, follow)
+    const response = await api.post(`${FOLLOWS_API}`, follow)
     return response.data
 }
 

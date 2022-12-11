@@ -1,26 +1,25 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "./users-thunk";
-import {Navigate} from "react-router";
+import {editProfileThunk} from "./users-thunk";
+import {Navigate, useParams} from "react-router";
 
-const Register = () => {
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice123')
-    const [validatePassword, setValidatePassword] = useState('alice123')
+const EditProfile = () => {
+    const {uid} = useParams()
+    const {currentUser} = useSelector((state) => state.users)
+    const [username, setUsername] = useState(currentUser.username)
+    const [password, setPassword] = useState(currentUser.password)
+    const [validatePassword, setValidatePassword] = useState(currentUser.password)
     const [error, setError] = useState(null)
-    const [firstName, setFirstName] = useState('alice')
-    const [lastName, setLastName] = useState('white')
-    const [email, setEmail] = useState('email')
-    const [phone, setPhone] = useState('000-000-0000')
-    const [dob, setDob] = useState(null)
-    const [type, setType] = useState('PROFESSIONAL')
-    const [emailVisible, setEmailVisible] = useState('Visible in the public profile')
-    const [phoneVisible, setPhoneVisible] = useState('Visible in the public profile')
-    const [dobVisible, setDobVisible] = useState('Visible in the public profile')
+    const [firstName, setFirstName] = useState(currentUser.firstName)
+    const [lastName, setLastName] = useState(currentUser.lastName)
+    const [email, setEmail] = useState(currentUser.email)
+    const [phone, setPhone] = useState(currentUser.phone)
+    const [dob, setDob] = useState(currentUser.dob)
+    const [type, setType] = useState(currentUser.type)
 
     const dispatch = useDispatch()
-    const { currentUser } = useSelector((state) => state.users)
-    const handleRegisterBtn = () => {
+
+    const handleSubmitBtn = () => {
         console.log("hi")
         if (password !== validatePassword) {
             setError('Passwords must match')
@@ -32,17 +31,16 @@ const Register = () => {
         //     password: password
         // }
         const newUser = {
-            username, password, firstName, lastName, email, phone, dob, type, emailVisible, phoneVisible, dobVisible
+            username, password, firstName, lastName, email, phone, dob, type
         }
-        dispatch(registerThunk(newUser))
+        dispatch(editProfileThunk(uid, newUser))
     }
-    if(currentUser) {
-      return (<Navigate to={'/profile'}/>)
-    }
+    // if(currentUser) {
+    //     return (<Navigate to={'/profile'}/>)
+    // }
     return (
         <>
-            <h1>Register</h1>
-
+            <h1>Edit Profile</h1>
             {
                 error &&
                 <div className="alert alert-danger">
@@ -89,15 +87,11 @@ const Register = () => {
             </div>
 
             <div>
-                <label for="email">Email</label>
+                <label>Email</label>
                 <input
                     className="form-control mb-2"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)} />
-                <select value={emailVisible} onChange={(e) => setEmailVisible(e.target.value)}>
-                    <option>Visible in the public profile</option>
-                    <option>Not Visible in the public profile</option>
-                </select>
             </div>
 
             <div>
@@ -106,10 +100,6 @@ const Register = () => {
                     className="form-control mb-2"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)} />
-                <select value={phoneVisible} onChange={(e) => setPhoneVisible(e.target.value)}>
-                    <option>Visible in the public profile</option>
-                    <option>Not Visible in the public profile</option>
-                </select>
             </div>
 
             <div>
@@ -119,30 +109,26 @@ const Register = () => {
                     value={dob}
                     type='date'
                     onChange={(e) => setDob(e.target.value)} />
-                <select value={dobVisible} onChange={(e) => setDobVisible(e.target.value)}>
-                    <option>Visible in the public profile</option>
-                    <option>Not Visible in the public profile</option>
+            </div>
+
+            <div>
+                <label>Please choose a User Type</label>
+                <select value={type} onChange={(e) => setType(e.target.value)}>
+                    <option value="PROFESSIONAL">Professional</option>
+                    <option value="STUDENT">Student</option>
+                    <option value="ADMIN">Admin</option>
                 </select>
             </div>
 
-            <br></br>
-            <div>
-                <label>Please choose a User Type </label>
-                    <select value={type} onChange={(e) => setType(e.target.value)}>
-                        <option value="PROFESSIONAL">Professional</option>
-                        <option value="STUDENT">Student</option>
-                        <option value="ADMIN">Admin</option>
-                    </select>
-            </div>
-
-            <button onClick={handleRegisterBtn} className="btn btn-primary">
-                Register
+            <button onClick={handleSubmitBtn} className="btn btn-primary">
+                Submit Update
             </button>
-            {
-                currentUser &&
-                <h2>Welcome {currentUser.username}</h2>
-            }
+            {/*{*/}
+            {/*    currentUser &&*/}
+            {/*    <h2>Welcome {currentUser.username}</h2>*/}
+            {/*}*/}
         </>
     )
 }
-export default Register
+
+export default EditProfile

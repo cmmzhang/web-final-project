@@ -6,7 +6,6 @@ const Navigation = () => {
     const {currentUser} = useSelector((state) => state.users)
       const { pathname } = useLocation()
       const parts = pathname.split('/')
-      console.log(parts)
       const screens = [
           'search',
           'users'
