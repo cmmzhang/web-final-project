@@ -24,7 +24,7 @@ const BooksApiDetails = () => {
   const {reviews} = useSelector((state) => state.reviews)
   console.log("reviews in detail page",{reviews})
   console.log("likes in detail page",{likes})
-  const [rerender, setRerender] = useState(true);
+  // const [rerender, setRerender] = useState(true);
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
 
@@ -61,7 +61,7 @@ const BooksApiDetails = () => {
       review,
       booksapiID
     }))
-    dispatch(findReviewsByBookThunk(booksapiID))
+    // dispatch(findReviewsByBookThunk(booksapiID))
   }
 
 
@@ -147,13 +147,15 @@ const BooksApiDetails = () => {
                     {review.author.username && 
                         <li className="list-group-item" key={index}>
                             {review.review}
-                            <Link to={`/profile/${review?.author?._id}`} className="float-end">
+                            <div> <span>review leaved by  </span>
+                            <Link to={`/profile/${review?.author?._id}`}>
                                 {review.author.username}
                             </Link>
                             <button className="float-end" disabled={currentUser?._id!==review?.author?._id} onClick={() => {
                                 console.log("button clicked")
                                 dispatch(deleteReviewThunk({review}))}
                               }>delete Review</button>
+                              </div>
                         </li>}
                         </>
                     )

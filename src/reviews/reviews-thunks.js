@@ -3,7 +3,11 @@ import {createReview, findReviewsByAuthor, findReviewsByBook, findAllReviews,del
 
 export const createReviewThunk = createAsyncThunk(
     'createReview',
-    async (review) =>{return await createReview(review)} 
+    async (review) =>{
+        await createReview(review)
+        // return await createReview(review)
+        return await findReviewsByBook(review.booksapiID)
+    } 
 )
 export const findReviewsByBookThunk = createAsyncThunk(
     'findReviewsByBookThunk',

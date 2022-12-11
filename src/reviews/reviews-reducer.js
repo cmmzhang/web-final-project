@@ -15,7 +15,8 @@ export const ReviewsReducer = createSlice ({
       },
     extraReducers: {
         [createReviewThunk.fulfilled]: (state, action) => {
-            state.reviews.push(action.payload)
+            state.reviews = action.payload
+            // state.reviews.push(action.payload)
         },
         [findReviewsByBookThunk.fulfilled]: (state, action) => {
             // console.log("findReviewsByBookThunk action.payload", action.payload)
