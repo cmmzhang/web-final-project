@@ -106,7 +106,7 @@ const BooksApiDetails = () => {
             <i onClick={() => {alertLogin()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
           }
           {
-            currentUser &&
+            currentUser && currentUser.type !== 'ADMIN' &&
             <i onClick={() => {UnlikeBook()}} className="float-end bi bi-hand-thumbs-down wd-enlarge me-2"></i>
             /*            <i onClick={() => {
                           dispatch(userUnlikesBookThunk({ uid: currentUser._id, bid: booksapiID}))
@@ -114,7 +114,7 @@ const BooksApiDetails = () => {
                         </i>*/
           }
           {
-            currentUser &&
+            currentUser && currentUser.type !== 'ADMIN' &&
             <i onClick={() => {likeBook()}} className="float-end bi bi-hand-thumbs-up wd-enlarge me-2"></i>
           }
         </div>
