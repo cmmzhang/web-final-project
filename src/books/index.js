@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import {
     findAllLikesThunk, findBooksLikedByUserThunk
 } from "../likes/likes-thunks";
-import {findUserByIdThunk} from "../users/users-thunk";
+import {findAllUsersThunk, findUserByIdThunk} from "../users/users-thunk";
 import {findReviewsByAuthorThunk, findAllReviewsThunk} from "../reviews/reviews-thunks";
 import {Link} from "react-router-dom";
 
 
 
 const Books = () => {
-    const {currentUser} = useSelector((state) => state.users)
+    const {currentUser, users} = useSelector((state) => state.users)
     const {likes} = useSelector((state) => state.likes)
     const {reviews} = useSelector((state) => state.reviews)
     const reviews_count = reviews.length
@@ -26,8 +26,18 @@ const Books = () => {
         if(currentUser && currentUser._id) {
             dispatch(findBooksLikedByUserThunk(currentUser._id))
             dispatch(findReviewsByAuthorThunk(currentUser._id))
-        } 
+        }
+        dispatch(findAllUsersThunk())
     }, [currentUser])
+
+    function getUsername(userId) {
+        for (var i = 0; i < users.length; i++) {
+            if (users[i]._id === userId) {
+                return users[i].username;
+            }
+        }
+    }
+
     return (
         <>
             <h1 className="fw-bold">
@@ -83,7 +93,7 @@ const Books = () => {
                                         &nbsp;is liked by User&nbsp;
                                     </span>
                                     <Link to={`/profile/${likes[count - 1].user}`}>
-                                        {likes[count - 1].user}
+                                        {getUsername(likes[count - 1].user)}
                                     </Link>
                                 </div>
                             }
@@ -126,7 +136,7 @@ const Books = () => {
                                         &nbsp;is reviewed by User&nbsp;
                                     </span>
                                     <Link to={`/profile/${reviews[reviews_count-1].author}`}>
-                                        {reviews[reviews_count-1].author}
+                                        {getUsername(reviews[reviews_count-1].author)}
                                     </Link>
                                 </div>
                             }
