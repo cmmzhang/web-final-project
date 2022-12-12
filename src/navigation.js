@@ -7,15 +7,17 @@ const Navigation = () => {
       const { pathname } = useLocation()
       const parts = pathname.split('/')
       const screens = [
-          'search',
-          'users'
+          'search'
       ]
         if (currentUser) {
             screens.push('profile')
+            if (currentUser && currentUser.type === 'ADMIN') {
+                screens.push('users')
+            }
         } else {
-            screens.push('login')
-            screens.push('register')
-        }
+                screens.push('login')
+                screens.push('register')
+            }
       return (
         <ul className="nav nav-pills">
           <li className="nav-item">

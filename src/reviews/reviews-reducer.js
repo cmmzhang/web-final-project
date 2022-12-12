@@ -4,7 +4,7 @@ import {
     findReviewsByBookThunk,
     findReviewsByAuthorThunk,
     findAllReviewsThunk,
-
+    deleteReviewThunk
 } from "./reviews-thunks";
 
 
@@ -15,7 +15,8 @@ export const ReviewsReducer = createSlice ({
       },
     extraReducers: {
         [createReviewThunk.fulfilled]: (state, action) => {
-            state.reviews.push(action.payload)
+            state.reviews = action.payload
+            // state.reviews.push(action.payload)
         },
         [findReviewsByBookThunk.fulfilled]: (state, action) => {
             // console.log("findReviewsByBookThunk action.payload", action.payload)
@@ -27,6 +28,15 @@ export const ReviewsReducer = createSlice ({
         },
         [findAllReviewsThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload
+        },
+        [deleteReviewThunk.fulfilled]:(state,action) => {
+            console.log("review status BEFORE", state.reviews)
+            console.log("action.payload._id", action.payload._id)
+            console.log("action.payload", action.payload)
+            
+            state.reviews = state.reviews.filter((review) => review._id !== action.payload._id)
+            console.log("review status AFTER", state.reviews)
+            
         }
     }}
 )
