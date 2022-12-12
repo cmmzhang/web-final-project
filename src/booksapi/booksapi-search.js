@@ -6,7 +6,7 @@ import {userLikesBookThunk} from "../likes/likes-thunks";
 import {Link} from "react-router-dom";
 
 const BooksApiSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('Java')
+  const [searchTerm, setSearchTerm] = useState('Becoming')
   const {books, loading} = useSelector((state) => state.booksapi)
   const dispatch = useDispatch()
   useEffect(() => {

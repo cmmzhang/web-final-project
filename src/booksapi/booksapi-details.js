@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect,useState} from "react";
 import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
 
+
 import {createReviewThunk, findReviewsByBookThunk, deleteReviewThunk} from "../reviews/reviews-thunks";
 
 import {
@@ -22,8 +23,6 @@ const BooksApiDetails = () => {
   const {likes} = useSelector((state) => state.likes)
   
   const {reviews} = useSelector((state) => state.reviews)
-  console.log("reviews in detail page",{reviews})
-  console.log("likes in detail page",{likes})
   // const [rerender, setRerender] = useState(true);
   const [review, setReview] = useState('')
   const dispatch = useDispatch()

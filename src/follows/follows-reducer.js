@@ -14,18 +14,12 @@ const followsReducer = createSlice({
   },
   extraReducers: {
     [followUsersThunk.fulfilled]: (state, action) => {
-      // console.log(state)
-      // console.log(1)
-      // console.log(current(state.followers))
-      // console.log(state.count)
-      // console.log(action.payload)
-      // console.log(Array.isArray(state.followers))
-      // console.log(Array.isArray(state.following))
-      // state.followers.push(action.payload.follower)
       state.followers = [...state.followers, action.payload.follower]
+      console.log("after follow")
+      console.log(action.payload)
     },
     [findFollowersThunk.fulfilled]: (state, action) => {
-      console.log("yeah")
+      console.log("find Followers")
       console.log(action.payload)
       state.followers = action.payload
     },

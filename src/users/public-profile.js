@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {useEffect} from "react";
+import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
 import {findBooksLikedByUserThunk} from "../likes/likes-thunks";
@@ -11,6 +11,7 @@ import {
   followUsersThunk
 } from "../follows/follows-thunk";
 
+
 const PublicProfile = () => {
   const {uid} = useParams()
   const {publicProfile, currentUser} = useSelector((state) => state.users)
@@ -20,6 +21,7 @@ const PublicProfile = () => {
   const dispatch = useDispatch()
 
   const handleFollowBtn = () => {
+      console.log(followers)
       if (followers.filter((follow) => follow.follower._id === currentUser._id).length === 0) {
           dispatch(followUsersThunk({
               followed: uid
@@ -34,7 +36,8 @@ const PublicProfile = () => {
     dispatch(findReviewsByAuthorThunk(uid))
     dispatch(findFollowersThunk(uid))
     dispatch(findFollowingThunk(uid))
-  }, [uid])
+
+  }, [followers])
   return(
       <>
           {currentUser && <button
@@ -98,6 +101,7 @@ const PublicProfile = () => {
         <div className="list-group">
           {
             followers && followers.map((follow) =>
+                follow.follower &&
                 <li className="list-group-item">
                     <Link to={`/profile/${follow.follower._id}`}>
                         {follow.follower.username}
