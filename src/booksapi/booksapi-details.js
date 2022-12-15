@@ -1,3 +1,4 @@
+import React from "react";
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect,useState} from "react";
@@ -66,7 +67,8 @@ const BooksApiDetails = () => {
 
 
   const reviewsLimit = 5;
-  const currentReview = reviews.filter((review) => review?.author?._id === currentUser?._id)
+  // const currentReview = reviews.filter((review) => review?.author?._id === currentUser?._id)
+  const currentReview = reviews.filter((review) => review.author._id === currentUser._id)
   console.log("currentReview: ", currentReview)
   let postIsDisabled = true;
   if(currentReview.length >= reviewsLimit) {

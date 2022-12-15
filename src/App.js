@@ -1,3 +1,4 @@
+import React from "react";
 import './App.css';
 import Books from "./books";
 import booksReducer from "./books/books-reducer";
@@ -23,7 +24,12 @@ import ReviewsReducer from "./reviews/reviews-reducer";
 import EditProfile from "./users/edit-profile";
 import followsReducer from "./follows/follows-reducer";
 
+// @mui material components
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
+// Material Kit 2 React themes
+import theme from "./assets/theme";
 const store = configureStore( {
     reducer: {
         books: booksReducer,
@@ -37,28 +43,31 @@ const store = configureStore( {
 
 function App() {
   return (
-    <div className="container mt-4 mb-4">
-        <Provider store={store}>
-          <CurrentUser>
-            <BrowserRouter>
-              <Navigation/>
-              <Routes>
-                <Route index element={<Books />} />
-                <Route path="/search" element={<BooksApiSearch />} />
-                <Route exact
-                       strict
-                       sensitive={false} path="/details/:booksapiID" element={<BooksApiDetails/>}/>
-                <Route path="/users" element={<UserList />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/profile/:uid" element={<PublicProfile/>}/>
-                <Route path="/editprofile/:uid" element={<EditProfile/>}/>
-              </Routes>
-            </BrowserRouter>
-          </CurrentUser>
-        </Provider>
-    </div>
+      <ThemeProvider theme={theme}>
+          <CssBaseline />
+            <div className="container mt-4 mb-4">
+                <Provider store={store}>
+                  <CurrentUser>
+                    <BrowserRouter>
+                      <Navigation/>
+                      <Routes>
+                        <Route index element={<Books />} />
+                        <Route path="/search" element={<BooksApiSearch />} />
+                        <Route exact
+                               strict
+                               sensitive={false} path="/details/:booksapiID" element={<BooksApiDetails/>}/>
+                        <Route path="/users" element={<UserList />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile/:uid" element={<PublicProfile/>}/>
+                        <Route path="/editprofile/:uid" element={<EditProfile/>}/>
+                      </Routes>
+                    </BrowserRouter>
+                  </CurrentUser>
+                </Provider>
+            </div>
+      </ThemeProvider>
   );
 }
 
