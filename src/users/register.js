@@ -13,6 +13,7 @@ import MKButton from "../components/MKButton";
 import {Link} from "react-router-dom";
 import {InputLabel, MenuItem, Select} from "@mui/material";
 
+
 const Register = () => {
     const [username, setUsername] = useState('alice')
     const [password, setPassword] = useState('alice123')
@@ -105,6 +106,8 @@ const Register = () => {
                                         label="UserName"
                                         InputLabelProps={{ shrink: true }}
                                         fullWidth
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </MKBox>
                                 <MKBox mb={2}>
@@ -113,6 +116,8 @@ const Register = () => {
                                         label="Password"
                                         InputLabelProps={{ shrink: true }}
                                         fullWidth
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </MKBox>
                                 <MKBox mb={2}>
@@ -121,6 +126,8 @@ const Register = () => {
                                         label="Validate Password"
                                         InputLabelProps={{ shrink: true }}
                                         fullWidth
+                                        value={validatePassword}
+                                        onChange={(e) => setValidatePassword(e.target.value)}
                                     />
                                 </MKBox>
                                 <MKBox mb={2}>
@@ -129,6 +136,8 @@ const Register = () => {
                                         label="First Name"
                                         InputLabelProps={{ shrink: true }}
                                         fullWidth
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
                                     />
                                 </MKBox>
                                 <MKBox mb={2}>
@@ -137,6 +146,8 @@ const Register = () => {
                                         label="Last Name"
                                         InputLabelProps={{ shrink: true }}
                                         fullWidth
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
                                     />
                                 </MKBox>
 
@@ -147,6 +158,8 @@ const Register = () => {
                                             label="Email"
                                             InputLabelProps={{ shrink: true }}
                                             fullWidth
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
@@ -168,9 +181,11 @@ const Register = () => {
                                     <Grid item xs={12} md={6}>
                                         <MKInput
                                             variant="standard"
-                                            label="Email"
+                                            label="Phone"
                                             InputLabelProps={{ shrink: true }}
                                             fullWidth
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
@@ -178,9 +193,9 @@ const Register = () => {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={emailVisible}
+                                            value={phoneVisible}
                                             label="Visible"
-                                            onChange={(e) => setEmailVisible(e.target.value)}
+                                            onChange={(e) => setPhoneVisible(e.target.value)}
                                         >
                                             <MenuItem value={"Visible in the public profile"}>Visible in the public profile</MenuItem>
                                             <MenuItem value={"Not Visible in the public profile"}>Not Visible in the public profile</MenuItem>
@@ -191,9 +206,11 @@ const Register = () => {
                                     <Grid item xs={12} md={6}>
                                         <MKInput
                                             variant="standard"
-                                            label="Email"
+                                            label="Date of Birth"
                                             InputLabelProps={{ shrink: true }}
                                             fullWidth
+                                            value={dob}
+                                            onChange={(e) => setDob(e.target.value)}
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
@@ -201,9 +218,9 @@ const Register = () => {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={emailVisible}
+                                            value={dobVisible}
                                             label="Visible"
-                                            onChange={(e) => setEmailVisible(e.target.value)}
+                                            onChange={(e) => setDobVisible(e.target.value)}
                                         >
                                             <MenuItem value={"Visible in the public profile"}>Visible in the public profile</MenuItem>
                                             <MenuItem value={"Not Visible in the public profile"}>Not Visible in the public profile</MenuItem>
@@ -215,13 +232,14 @@ const Register = () => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={emailVisible}
-                                        label="Visible"
-                                        onChange={(e) => setEmailVisible(e.target.value)}
+                                        value={type}
+                                        label="Type"
+                                        onChange={(e) => setType(e.target.value)}
                                         fullWidth
                                     >
-                                        <MenuItem value={"Visible in the public profile"}>Visible in the public profile</MenuItem>
-                                        <MenuItem value={"Not Visible in the public profile"}>Not Visible in the public profile</MenuItem>
+                                        <MenuItem value={"PROFESSIONAL"}>Professional</MenuItem>
+                                        <MenuItem value={"STUDENT"}>Student</MenuItem>
+                                        <MenuItem value={"ADMIN"}>Admin</MenuItem>
                                     </Select>
                                 </MKBox>
                                 <MKBox mt={4} mb={1}>

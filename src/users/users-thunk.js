@@ -33,5 +33,17 @@ export const profileThunk = createAsyncThunk(
 
 export const editProfileThunk = createAsyncThunk(
     'editprofile',
-    async (uid, userUpdates) => await updateUser(uid, userUpdates)
+    async (data) => {
+        console.log(data)
+        console.log(data.newUser)
+        const res = await updateUser(data)
+    }
+)
+
+
+export const findMyInfoThunk = createAsyncThunk(
+    'findmyinfo',
+    async (uid) =>
+        await findUserById(uid)
+
 )

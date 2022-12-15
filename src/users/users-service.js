@@ -40,7 +40,14 @@ export const logout = async () => {
     return response.data
 }
 export const deleteUser = async (uid) => { }
-export const updateUser = async (uid, userUpdates) => {
-    const response = await api.post(`${USER_API_URL}/${uid}`, userUpdates);
+
+export const updateUser = async (data) => {
+    console.log("hihi service")
+    const uid = data.uid
+    const userUpdates = data.newUser
+    console.log(userUpdates)
+    console.log(uid)
+    const response = await api.put(`${USER_API_URL}/${uid}`, userUpdates);
+    console.log(response)
     return response.data
 }

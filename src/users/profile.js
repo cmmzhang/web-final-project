@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {findUserByIdThunk, logoutThunk} from "./users-thunk";
+import {findMyInfoThunk, findUserByIdThunk, logoutThunk} from "./users-thunk";
 import {Link, useNavigate} from "react-router-dom";
 import {Navigate} from "react-router";
 import React, {useEffect} from "react";
@@ -56,8 +56,7 @@ const Profile = () => {
           navigate(`/editprofile/${currentUser._id}`)
       }
         useEffect(() => {
-
-            dispatch(findUserByIdThunk(currentUser._id))
+            dispatch(findMyInfoThunk(currentUser._id))
             dispatch(findBooksLikedByUserThunk(currentUser._id))
             dispatch(findReviewsByAuthorThunk(currentUser._id))
             dispatch(findFollowersThunk(currentUser._id))

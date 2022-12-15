@@ -54,21 +54,21 @@ const Books = () => {
 
     return (
         <>
-        <MKBox position="relative" width="100%" left={0} right={0}>
+        <MKBox position="relative" width="100%" left={0} right={0} mt={3}>
             <MKBox component="nav" position="absolute" top="0.5rem" width="100%">
                 <Container>
                     <Grid container flexDirection="row" alignItems="center">
-                        <MKTypography
-                            // component={Link}
-                            href="#"
-                            variant="button"
-                            color="white"
-                            fontWeight="regular"
-                            py={0.8125}
-                            mr={2}
-                        >
-                            Fun To Read
-                        </MKTypography>
+                        {/*<MKTypography*/}
+                        {/*    // component={Link}*/}
+                        {/*    href="#"*/}
+                        {/*    variant="button"*/}
+                        {/*    color="white"*/}
+                        {/*    fontWeight="regular"*/}
+                        {/*    py={0.8125}*/}
+                        {/*    mr={2}*/}
+                        {/*>*/}
+                        {/*    Fun To Read*/}
+                        {/*</MKTypography>*/}
                         <MKButton
                             variant="outlined"
                             color="white"
@@ -84,45 +84,45 @@ const Books = () => {
                             mx="auto"
                             sx={{ listStyle: "none" }}
                         >
-                            <MKBox component="li">
-                                <MKTypography
-                                    component={Link}
-                                    href="#"
-                                    variant="button"
-                                    color="white"
-                                    fontWeight="regular"
-                                    p={1}
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Home
-                                </MKTypography>
-                            </MKBox>
-                            <MKBox component="li">
-                                <MKTypography
-                                    component={Link}
-                                    href="#"
-                                    variant="button"
-                                    color="white"
-                                    fontWeight="regular"
-                                    p={1}
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    About Us
-                                </MKTypography>
-                            </MKBox>
-                            <MKBox component="li">
-                                <MKTypography
-                                    component={Link}
-                                    href="#"
-                                    variant="button"
-                                    color="white"
-                                    fontWeight="regular"
-                                    p={1}
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Contact Us
-                                </MKTypography>
-                            </MKBox>
+                            {/*<MKBox component="li">*/}
+                            {/*    <MKTypography*/}
+                            {/*        component={Link}*/}
+                            {/*        href="#"*/}
+                            {/*        variant="button"*/}
+                            {/*        color="white"*/}
+                            {/*        fontWeight="regular"*/}
+                            {/*        p={1}*/}
+                            {/*        onClick={(e) => e.preventDefault()}*/}
+                            {/*    >*/}
+                            {/*        Home*/}
+                            {/*    </MKTypography>*/}
+                            {/*</MKBox>*/}
+                            {/*<MKBox component="li">*/}
+                            {/*    <MKTypography*/}
+                            {/*        component={Link}*/}
+                            {/*        href="#"*/}
+                            {/*        variant="button"*/}
+                            {/*        color="white"*/}
+                            {/*        fontWeight="regular"*/}
+                            {/*        p={1}*/}
+                            {/*        onClick={(e) => e.preventDefault()}*/}
+                            {/*    >*/}
+                            {/*        About Us*/}
+                            {/*    </MKTypography>*/}
+                            {/*</MKBox>*/}
+                            {/*<MKBox component="li">*/}
+                            {/*    <MKTypography*/}
+                            {/*        component={Link}*/}
+                            {/*        href="#"*/}
+                            {/*        variant="button"*/}
+                            {/*        color="white"*/}
+                            {/*        fontWeight="regular"*/}
+                            {/*        p={1}*/}
+                            {/*        onClick={(e) => e.preventDefault()}*/}
+                            {/*    >*/}
+                            {/*        Contact Us*/}
+                            {/*    </MKTypography>*/}
+                            {/*</MKBox>*/}
                         </MKBox>
                         <MKBox
                             component="ul"
@@ -197,12 +197,12 @@ const Books = () => {
                         <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
                             Bookworm web app helps readers search information about book reviews, and customize book reading lists.
                         </MKTypography>
-                        <Stack direction="row" spacing={1} mt={3}>
-                            <MKButton color="white">Get Started</MKButton>
-                            <MKButton variant="text" color="white">
-                                Read more
-                            </MKButton>
-                        </Stack>
+                        {/*<Stack direction="row" spacing={1} mt={3}>*/}
+                        {/*    <MKButton color="white">Get Started</MKButton>*/}
+                        {/*    <MKButton variant="text" color="white">*/}
+                        {/*        Read more*/}
+                        {/*    </MKButton>*/}
+                        {/*</Stack>*/}
                     </Grid>
                 </Container>
             </MKBox>
@@ -226,7 +226,86 @@ const Books = () => {
         {/*            <p>Bookworm web app helps readers search information about book reviews, and customize book reading lists. </p>*/}
         {/*        </div>*/}
         {/*    </div>*/}
-            {
+        {/*    {*/}
+            <MKTypography variant="h3" mt={2} mb={1}>
+                Check the latest
+            </MKTypography>
+            <MKBox
+                variant="gradient"
+                bgColor="info"
+                coloredShadow="info"
+                borderRadius="lg"
+                p={1}
+                mt={1}
+            >
+                { currentUser && <MKTypography variant="h3" color="white">
+                    My most recent like
+                </MKTypography> }
+                { !currentUser && <MKTypography variant="h3" color="white">
+                    The most recent like on the website
+                </MKTypography> }
+            </MKBox>
+            <MKBox p={1} width="100%" component="form" method="post" autocomplete="off">
+                {currentUser && likes[count - 1] &&
+                <div>
+                    <Link to={`/details/${likes[count - 1].book}`}>
+                        {likes[count - 1].book}
+                    </Link>
+                </div>}
+            </MKBox>
+            <MKBox p={1} width="100%" component="form" method="post" autocomplete="off">
+                {!currentUser && likes[count - 1] &&
+                <div>
+                    <Link to={`/details/${likes[count - 1].book}`}>
+                        {likes[count - 1].book}
+                    </Link>
+                    <span>
+                        &nbsp;is liked by User&nbsp;
+                    </span>
+                    <Link to={`/profile/${likes[count - 1].user}`}>
+                        {getUsername(likes[count - 1].user)}
+                    </Link>
+                </div>}
+            </MKBox>
+
+            <MKBox
+                variant="gradient"
+                bgColor="info"
+                coloredShadow="info"
+                borderRadius="lg"
+                p={1}
+                mt={3}
+            >
+                { currentUser && <MKTypography variant="h3" color="white">
+                    My most recent review
+                </MKTypography> }
+                { !currentUser && <MKTypography variant="h3" color="white">
+                    The most recent review on the website
+                </MKTypography> }
+            </MKBox>
+            <MKBox p={1} width="100%" component="form" method="post" autocomplete="off">
+                {currentUser && reviews[reviews_count-1] &&
+                <div>
+                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                        {reviews[reviews_count-1].booksapiID}
+                    </Link>
+                </div>}
+            </MKBox>
+            <MKBox p={1} width="100%" component="form" method="post" autocomplete="off">
+                {!currentUser && reviews[reviews_count-1] &&
+                <div>
+                    <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>
+                        {reviews[reviews_count-1].booksapiID}
+                    </Link>
+                    <span>
+                                        &nbsp;is reviewed by User&nbsp;
+                                    </span>
+                    <Link to={`/profile/${reviews[reviews_count-1].author}`}>
+                        {getUsername(reviews[reviews_count-1].author)}
+                    </Link>
+                </div>}
+            </MKBox>
+            {/*            {
                 currentUser &&
                 <div className="card border-secondary mb-3">
                     <h3 className="card-header"> My most recent like </h3>
@@ -310,7 +389,92 @@ const Books = () => {
                         </div>
                     </div>
                 </div>
-            }
+            }*/}
+
+        {/*        currentUser &&*/}
+        {/*        <div className="card border-secondary mb-3">*/}
+        {/*            <h3 className="card-header"> My most recent like </h3>*/}
+        {/*            <div className="row card-body">*/}
+        {/*                <div className="col">*/}
+        {/*                    {*/}
+        {/*                        likes[count - 1] &&*/}
+        {/*                        <div>*/}
+        {/*                            <Link to={`/details/${likes[count - 1].book}`}>*/}
+        {/*                                {likes[count - 1].book}*/}
+        {/*                            </Link>*/}
+        {/*                        </div>*/}
+        {/*                    }*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    }*/}
+        {/*    {*/}
+        {/*        !currentUser &&*/}
+        {/*        <div className="card border-secondary mb-3">*/}
+        {/*            <h3 className="card-header">Most recent like</h3>*/}
+        {/*            <div className="row card-body">*/}
+        {/*                <div className="col">*/}
+        {/*                    {*/}
+        {/*                        likes[count - 1] &&*/}
+        {/*                        <div>*/}
+        {/*                            <Link to={`/details/${likes[count - 1].book}`}>*/}
+        {/*                                {likes[count - 1].book}*/}
+        {/*                            </Link>*/}
+        {/*                            <span>*/}
+        {/*                                &nbsp;is liked by User&nbsp;*/}
+        {/*                            </span>*/}
+        {/*                            <Link to={`/profile/${likes[count - 1].user}`}>*/}
+        {/*                                {getUsername(likes[count - 1].user)}*/}
+        {/*                            </Link>*/}
+        {/*                        </div>*/}
+        {/*                    }*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    }*/}
+
+        {/*    {*/}
+        {/*        currentUser &&*/}
+        {/*        <div className="card border-secondary mb-3">*/}
+        {/*            <h3 className="card-header"> My most recent review</h3>*/}
+        {/*            <div className="row card-body">*/}
+        {/*                <div className="col">*/}
+        {/*                    {*/}
+        {/*                        reviews[reviews_count-1] &&*/}
+        {/*                        <div>*/}
+        {/*                            <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>*/}
+        {/*                                {reviews[reviews_count-1].booksapiID}*/}
+        {/*                            </Link>*/}
+        {/*                        </div>*/}
+        {/*                    }*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    }*/}
+        {/*    {*/}
+        {/*        !currentUser &&*/}
+        {/*        <div className="card border-secondary mb-3">*/}
+        {/*            <h3 className="card-header">Most recent Review</h3>*/}
+        {/*            <div className="row card-body">*/}
+        {/*                <div className="col">*/}
+        {/*                    {*/}
+        {/*                        reviews[reviews_count-1] &&*/}
+        {/*                        <div>*/}
+        {/*                            <Link to={`/details/${reviews[reviews_count-1].booksapiID}`}>*/}
+        {/*                                {reviews[reviews_count-1].booksapiID}*/}
+        {/*                            </Link>*/}
+        {/*                            <span>*/}
+        {/*                                &nbsp;is reviewed by User&nbsp;*/}
+        {/*                            </span>*/}
+        {/*                            <Link to={`/profile/${reviews[reviews_count-1].author}`}>*/}
+        {/*                                {getUsername(reviews[reviews_count-1].author)}*/}
+        {/*                            </Link>*/}
+        {/*                        </div>*/}
+        {/*                    }*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    }*/}
         </>
     )
 }
