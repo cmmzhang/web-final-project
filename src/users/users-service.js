@@ -21,7 +21,6 @@ export const findAllUsers = async () => {
 
 export const register = async (user) => {
     const response = await api.post(`${BASE_URL}/register`, user);
-    console.log(response.data);
     return response.data
 }
 
@@ -37,6 +36,7 @@ export const profile = async () => {
 
 export const logout = async () => {
     const response = await api.post(`${BASE_URL}/logout`);
+    console.log(response)
     return response.data
 }
 export const deleteUser = async (uid) => { }

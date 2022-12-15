@@ -49,9 +49,6 @@ const Profile = () => {
         navigate('/login')
       }
 
-
-
-      console.log('')
       const handleEditProfileBtn = () => {
           navigate(`/editprofile/${currentUser._id}`)
       }
@@ -64,9 +61,9 @@ const Profile = () => {
 
         }, [])
 
-    if (!currentUser) {
-        return (<Navigate to={'/login'}/>)
-    }
+    // if (!currentUser) {
+    //     return (<Navigate to={'/login'}/>)
+    // }
 
         return (
             <>

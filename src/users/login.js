@@ -30,37 +30,26 @@ const Login = () => {
 
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { currentUser } = useSelector((state) => state.users)
 
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}))
+            console.log(currentUser)
         } catch (e) {
         }
     }
+
     if (currentUser) {
-        return (<Navigate to={'/profile'}/>)
+        navigate('/profile')
     }
 
     return (
         <>
-            {/*<DefaultNavbar*/}
-            {/*    routes={routes}*/}
-            {/*    action={{*/}
-            {/*        type: "external",*/}
-            {/*        route: "https://www.creative-tim.com/product/material-kit-react",*/}
-            {/*        label: "free download",*/}
-            {/*        color: "info",*/}
-            {/*    }}*/}
-            {/*    transparent*/}
-            {/*    light*/}
-            {/*/>*/}
             {
-                error &&
-                <div className="alert alert-danger">
-                  {error}
-                </div>
-             }
+                error && alert("Invalid UserName or Password")
+            }
             <MKBox
                 position="absolute"
                 top={80}

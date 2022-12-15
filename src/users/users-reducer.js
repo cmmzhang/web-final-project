@@ -32,7 +32,6 @@ const usersReducer = createSlice({
             state.currentUser = action.payload
         },
         [loginThunk.rejected]: (state, action) => {
-            state.error = action.payload
             state.currentUser = null
         },
         [profileThunk.fulfilled]: (state, action) => {
