@@ -26,7 +26,7 @@ import Team from "../pages/LandingPages/AboutUs/sections/Team";
 
 
 // Images
-import bgImage from "../assets/images/bg-about-us.jpg";
+// import bgImage from "../assets/images/bg-about-us.jpg";
 import HorizontalTeamCard from "../examples/Cards/TeamCards/HorizontalTeamCard";
 import team1 from "../assets/images/team-5.jpg";
 import team2 from "../assets/images/bruce-mars.jpg";
@@ -43,6 +43,7 @@ const Profile = () => {
       const {reviews} = useSelector((state) => state.reviews)
       const {followers, following} = useSelector((state) => state.follows)
       const dispatch = useDispatch()
+     const bgImage = "https://images.unsplash.com/photo-1555116505-38ab61800975?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJvb2slMjBzaGVsZnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
 
       const handleLogoutBtn = () => {
         dispatch(logoutThunk())
@@ -153,7 +154,7 @@ const Profile = () => {
                             <Grid container spacing={3} alignItems="center">
                                 <Grid item xs={12} lg={4}>
                                     <img
-                                     src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        src="https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTB8NDM2MDU5Mnx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
                                     width={300}
                                     height={300}/>
                                 </Grid>
@@ -163,7 +164,7 @@ const Profile = () => {
                                         <MKBox position="relative" borderRadius="lg" mx={2} mt={-3}>
                                             <MKBox
                                                 component="img"
-                                                src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                                                src="https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw0MzYwNTkyfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                                                 alt="My Personal Information"
                                                 borderRadius="lg"
                                                 width="100%"
@@ -192,12 +193,20 @@ const Profile = () => {
                                             </MKTypography>
                                             <MKBox mt={1} mb={3}>
                                                 <MKTypography variant="body2" component="p" color="text">
-                                                    <div>{currentUser && currentUser.username}</div>
-                                                    <div>{currentUser && currentUser.firstName}</div>
-                                                    <div>{currentUser && currentUser.lastName}</div>
-                                                    <div>{currentUser && currentUser.email}</div>
-                                                    <div>{currentUser && currentUser.phone}</div>
-                                                    <div>{currentUser && currentUser.dob}</div>
+                                                    <div><span>User Name: </span>{currentUser && currentUser.username}
+                                                    </div>
+                                                    <div><span>First Name: </span>{currentUser && currentUser.firstName}
+                                                    </div>
+                                                    <div><span>Last Name: </span>{currentUser && currentUser.lastName}
+                                                    </div>
+                                                    <div><span><i
+                                                        className="bi bi-mailbox"></i>  Email: </span> {currentUser && currentUser.email}
+                                                    </div>
+                                                    <div><span><i
+                                                        className="bi bi-telephone"></i> Phone number: </span> {currentUser && currentUser.phone}
+                                                    </div>
+                                                    <div><span><i className="bi bi-calendar-heart"></i> Date of Birth: </span>{currentUser && currentUser.dob}
+                                                    </div>
                                                 </MKTypography>
                                             </MKBox>
                                         </MKBox>
@@ -205,7 +214,7 @@ const Profile = () => {
                                 </Grid>
                                 <Grid item xs={12} lg={4}>
                                     <img
-                                        src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        src="https://images.unsplash.com/photo-1507831228884-93d43e81a99d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3w0MzYwNTkyfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                                         width={300}
                                         height={300}/>
                                 </Grid>
@@ -241,8 +250,9 @@ const Profile = () => {
                                                     <MKBox width="100%" pt={2} pb={1} px={2}>
                                                         <MKBox
                                                             component="img"
-                                                            src={team1}
+                                                            // src={team1}
                                                             // alt={name}
+                                                            src ="https://images.unsplash.com/photo-1536237880829-dd441c249e0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMDc1OTkzNHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
                                                             width="100%"
                                                             borderRadius="md"
                                                             shadow="lg"
@@ -282,8 +292,9 @@ const Profile = () => {
                                                     <MKBox width="100%" pt={2} pb={1} px={2}>
                                                         <MKBox
                                                             component="img"
-                                                            src={team1}
+                                                            // src={team1}
                                                             // alt={name}
+                                                            src="https://images.unsplash.com/photo-1584017975458-52cce2008518?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMDAxNTI2NXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
                                                             width="100%"
                                                             borderRadius="md"
                                                             shadow="lg"
@@ -328,7 +339,8 @@ const Profile = () => {
                                                     <MKBox width="100%" pt={2} pb={1} px={2}>
                                                         <MKBox
                                                             component="img"
-                                                            src={team1}
+                                                            // src={team1}
+                                                            src ="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTZ8MTE1Mzk2Njl8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
                                                             // alt={name}
                                                             width="100%"
                                                             borderRadius="md"
@@ -371,7 +383,8 @@ const Profile = () => {
                                                     <MKBox width="100%" pt={2} pb={1} px={2}>
                                                         <MKBox
                                                             component="img"
-                                                            src={team1}
+                                                            // src={team1}
+                                                            src="https://images.unsplash.com/photo-1550071593-fd1bdaf1f93c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxJZVAtWEQ1SGNOY3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
                                                             // alt={name}
                                                             width="100%"
                                                             borderRadius="md"

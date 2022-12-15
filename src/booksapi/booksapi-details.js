@@ -190,7 +190,7 @@ const BooksApiDetails = () => {
                   </MKBox>
                 </Grid>
                 <Grid item xs={12} lg={7}>
-                  <MKBox component="form" p={2} method="post">
+                  <MKBox p={2}>
                     <MKBox px={3} py={{ xs: 2, sm: 6 }}>
                       <MKTypography variant="h2" mb={1}>
                         Welcome!
@@ -228,7 +228,7 @@ const BooksApiDetails = () => {
                                             {review.author.username &&
                                             <li className="list-group-item" key={index}>
                                                 {review.review}
-                                                <div> <span>review leaved by  </span>
+                                                <div> <span>review left by  </span>
                                                     <Link to={`/profile/${review?.author?._id}`}>
                                                         {review.author.username}
                                                     </Link>

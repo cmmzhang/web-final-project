@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "./users-thunk";
+import {loginThunk, findAllUsersThunk} from "./users-thunk";
 import {Navigate, useNavigate} from "react-router";
 import { Link } from "react-router-dom";
 
@@ -25,19 +25,32 @@ import SimpleFooter from "../examples/Footers/SimpleFooter";
 import bgImage from "../assets/images/bg-sign-in-basic.jpeg";
 
 const Login = () => {
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice123')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { currentUser } = useSelector((state) => state.users)
+    const { currentUser, users } = useSelector((state) => state.users)
+
+    useEffect(() => {
+        dispatch(findAllUsersThunk())
+    }, [users])
+
+    function getUserPassword(userName) {
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username === userName) {
+                return users[i].password;
+            }
+        }
+    }
 
     const handleLoginBtn = () => {
-        try {
+        if(getUserPassword(username) === password) {
             dispatch(loginThunk({username, password}))
-            console.log(currentUser)
-        } catch (e) {
+        }
+        else {
+            alert("Invalid UserName or Password")
         }
     }
 
@@ -47,9 +60,6 @@ const Login = () => {
 
     return (
         <>
-            {
-                error && alert("Invalid UserName or Password")
-            }
             <MKBox
                 position="absolute"
                 top={80}
@@ -105,7 +115,7 @@ const Login = () => {
                                             Don&apos;t have an account?{" "}
                                             <MKTypography
                                                 component={Link}
-                                                to="/authentication/sign-up/cover"
+                                                to="/register"
                                                 variant="button"
                                                 color="info"
                                                 fontWeight="medium"
@@ -121,9 +131,9 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </MKBox>
-            <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
-                <SimpleFooter light />
-            </MKBox>
+            {/*<MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">*/}
+            {/*    <SimpleFooter light />*/}
+            {/*</MKBox>*/}
         </>
         // <>
         //     <h1>Login</h1>

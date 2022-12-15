@@ -57,7 +57,7 @@ const BooksApiSearch = () => {
                               Search
                           </MKButton>
                       </Stack>
-                      <ul>
+                      <ul className="list-unstyled">
                           {
                               books.map((book) =>
                                   <li className="text-white" key={book.booksapiID}>
