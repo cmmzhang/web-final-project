@@ -228,7 +228,7 @@ const Register = () => {
                                     </Grid>
                                 </Grid>
                                 <MKBox mb={2} mt={1}>
-                                    <InputLabel id="demo-simple-select-label">Visible</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">User Type</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
