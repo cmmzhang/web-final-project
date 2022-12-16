@@ -69,13 +69,13 @@ const Books = () => {
                         {/*>*/}
                         {/*    Fun To Read*/}
                         {/*</MKTypography>*/}
-                        <MKButton
-                            variant="outlined"
-                            color="white"
-                            sx={{ display: { xs: "block", lg: "none" }, ml: "auto" }}
-                        >
-                            <MKBox component="i" color="white" className="fas fa-bars" />
-                        </MKButton>
+                        {/*<MKButton*/}
+                        {/*    variant="outlined"*/}
+                        {/*    color="white"*/}
+                        {/*    sx={{ display: { xs: "block", lg: "none" }, ml: "auto" }}*/}
+                        {/*>*/}
+                        {/*    <MKBox component="i" color="white" className="fas fa-bars" />*/}
+                        {/*</MKButton>*/}
                         <MKBox
                             component="ul"
                             display={{ xs: "none", lg: "flex" }}

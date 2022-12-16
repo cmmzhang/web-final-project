@@ -232,10 +232,9 @@ const BooksApiDetails = () => {
                                                     <Link to={`/profile/${review?.author?._id}`}>
                                                         {review.author.username}
                                                     </Link>
-                                                    <button className="float-end" disabled={currentUser?._id!==review?.author?._id} onClick={() => {
-                                                        console.log("button clicked")
+                                                    <MKButton className="float-end" variant="gradient" color="info" disabled={currentUser?._id!==review?.author?._id} onClick={() => {
                                                         dispatch(deleteReviewThunk({review}))}
-                                                    }>delete Review</button>
+                                                    }>delete Review</MKButton>
                                                 </div>
                                             </li>}
                                         </>
@@ -262,9 +261,6 @@ const BooksApiDetails = () => {
                     <textarea
                         onChange={(e) => setReview(e.target.value)}
                         className="form-control"></textarea>
-                              {/* <span>postIsDisabled:  {postIsDisabled} </span> */}
-                              {/* <button disabled={postIsDisabled}onClick={handlePostReviewBtn}>Post Review</button> */}
-                              {/*<button onClick={handlePostReviewBtn}>Send Message</button>*/}
                               <MKButton onClick={handlePostReviewBtn} variant="gradient" color="info">
                                 Post Review
                               </MKButton>
@@ -276,12 +272,9 @@ const BooksApiDetails = () => {
                     <textarea
                         onChange={(e) => setReview(e.target.value)}
                         className="form-control"></textarea>
-                              {/* <span>postIsDisabled:  {postIsDisabled} </span> */}
-                              {/*<button disabled={postIsDisabled} onClick={handlePostReviewBtn}>Post Review</button>*/}
                               <MKButton disabled={postIsDisabled} onClick={handlePostReviewBtn} variant="gradient" color="info">
                                 Post Review
                               </MKButton>
-                              {/* <button onClick={handlePostReviewBtn}>Post Review</button> */}
                             </div>
                           }
                         </Grid>
