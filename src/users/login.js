@@ -17,13 +17,6 @@ import MKTypography from "../components/MKTypography";
 import MKInput from "../components/MKInput";
 import MKButton from "../components/MKButton";
 
-// Material Kit 2 React example components
-import DefaultNavbar from "../examples/Navbars/DefaultNavbar";
-import SimpleFooter from "../examples/Footers/SimpleFooter";
-
-// Images
-import bgImage from "../assets/images/bg-sign-in-basic.jpeg";
-
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -32,6 +25,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { currentUser, users } = useSelector((state) => state.users)
+    const bgImage = "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1546&q=80"
 
     useEffect(() => {
         dispatch(findAllUsersThunk())

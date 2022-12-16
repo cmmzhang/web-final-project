@@ -30,6 +30,7 @@ const Books = () => {
     const reviews_count = reviews.length
     const count = likes.length
     const dispatch = useDispatch()
+    const bgImage = "https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
     useEffect(() => {
         dispatch(findAllLikesThunk())
         dispatch(findAllReviewsThunk())

@@ -2,27 +2,16 @@ import React, { useEffect } from "react"
 import { findAllUsersThunk } from "./users-thunk"
 import {useSelector, useDispatch} from "react-redux";
 import MKBox from "../components/MKBox";
-import bgImage from "../assets/images/bg-sign-in-basic.jpeg";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import MKTypography from "../components/MKTypography";
-import MKInput from "../components/MKInput";
-import MKButton from "../components/MKButton";
-import {Link} from "react-router-dom";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
-import team1 from "../assets/images/team-5.jpg";
-import {InputLabel, MenuItem, Select} from "@mui/material";
+
 const UserList = () => {
-    //const [users, setUsers] = useState([])
+
     const { users } = useSelector((state) => state.users)
-    // const findAllUsers = async () => {
-    //     const users = await service.findAllUsers()
-    //     setUsers(users)
-    // }
+    const bgImage = "https://images.unsplash.com/photo-1604866830893-c13cafa515d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+
     const dispatch = useDispatch()
     useEffect(() => {
-        // findAllUsers()
         dispatch(findAllUsersThunk())
     }, [dispatch])
     return (

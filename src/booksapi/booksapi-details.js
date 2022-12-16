@@ -8,7 +8,6 @@ import {findBookByBooksApiIdThunk} from "./booksapi-thunks";
 import {createReviewThunk, findReviewsByBookThunk, deleteReviewThunk} from "../reviews/reviews-thunks";
 
 import {
-  findAllLikesThunk,
   findUsersWhoLikedBookThunk,
   userLikesBookThunk,
   userUnlikesBookThunk
@@ -35,11 +34,11 @@ const BooksApiDetails = () => {
   const {details} = useSelector((state) => state.booksapi)
   const {currentUser} = useSelector((state) => state.users)
   const {likes} = useSelector((state) => state.likes)
-  
   const {reviews} = useSelector((state) => state.reviews)
   // const [rerender, setRerender] = useState(true);
   const [review, setReview] = useState('')
   const dispatch = useDispatch()
+  const bgImage = "https://images.unsplash.com/photo-1551373824-52d97db2f2c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTZ8elZJZ0FHMWtkWlV8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
 
   useEffect(() => {
       dispatch(findBookByBooksApiIdThunk(booksapiID))
@@ -227,7 +226,8 @@ const BooksApiDetails = () => {
                                             {review.author.username &&
                                             <li className="list-group-item" key={index}>
                                                 {review.review}
-                                                <div> <span>review left by  </span>
+
+                                                <div> <span>Review Left By  </span>
                                                     <Link to={`/profile/${review?.author?._id}`}>
                                                         {review.author.username}
                                                     </Link>

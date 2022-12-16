@@ -4,13 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {findAllUsersThunk, loginThunk, registerThunk} from "./users-thunk";
 import {Navigate} from "react-router";
 import MKBox from "../components/MKBox";
-import bgImage from "../assets/images/illustrations/illustration-reset.jpg";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import MKTypography from "../components/MKTypography";
 import MKInput from "../components/MKInput";
 import MKButton from "../components/MKButton";
-import {Link} from "react-router-dom";
 import {InputLabel, MenuItem, Select} from "@mui/material";
 
 
@@ -30,14 +27,15 @@ const Register = () => {
     const [dobVisible, setDobVisible] = useState('Visible in the public profile')
     const dispatch = useDispatch()
     const { currentUser, users } = useSelector((state) => state.users)
+    const bgImage = "https://images.unsplash.com/photo-1570676765227-b25aa08d9752?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
 
     useEffect(() => {
         dispatch(findAllUsersThunk())
     }, [])
 
-    function checkExistingUser(userName) {
+    function checkExistingUser(username) {
         for (var i = 0; i < users.length; i++) {
-            if (users[i].username === userName) {
+            if (users[i].username === username) {
                 return false;
             }
         }
@@ -50,14 +48,16 @@ const Register = () => {
             alert('Passwords do not match')
             return
         }
-        if (!checkExistingUser(username)) {
-            alert('Username already exists')
-        }
-        setError(null)
-        const newUser = {
-            username, password, firstName, lastName, email, phone, dob, type, emailVisible, phoneVisible, dobVisible
-        }
-        dispatch(registerThunk(newUser))
+        // else if (!checkExistingUser(username)) {
+        //     alert('Username already exists')
+        // }
+        // else {
+            setError(null)
+            const newUser = {
+                username, password, firstName, lastName, email, phone, dob, type, emailVisible, phoneVisible, dobVisible
+            }
+            dispatch(registerThunk(newUser))
+        // }
 
     }
     if(currentUser) {

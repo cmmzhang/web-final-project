@@ -20,14 +20,6 @@ import Card from "@mui/material/Card";
 // Material Kit 2 React components
 import MKBox from "../components/MKBox";
 import MKTypography from "../components/MKTypography";
-import MKButton from "../components/MKButton";
-
-// Material Kit 2 React examples
-import DefaultFooter from "../examples/Footers/DefaultFooter";
-import Stack from "@mui/material/Stack";
-// About Us page sections
-import Information from "../pages/LandingPages/AboutUs/sections/Information";
-import Team from "../pages/LandingPages/AboutUs/sections/Team";
 
 
 const PublicProfile = () => {
@@ -49,9 +41,9 @@ const PublicProfile = () => {
             alert('You have already followed this user')
         }
     }
-    if (currentUser && publicProfile.username === currentUser.username) {
-        navigate('/profile')
-    }
+    // if (currentUser && publicProfile && publicProfile.username === currentUser.username) {
+    //     navigate('/profile')
+    // }
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
         dispatch(findBooksLikedByUserThunk(uid))
@@ -99,7 +91,7 @@ const PublicProfile = () => {
                         >
                         </MKTypography>
                         <MKTypography variant="body1" color="white" opacity={0.8} mt={1} mb={3}>
-                            Welcome to to my home page
+                            Welcome to my home page
                         </MKTypography>
                     </Grid>
                 </Container>
@@ -155,18 +147,8 @@ const PublicProfile = () => {
                                         />
                                     </MKBox>
                                     <MKBox p={3} mt={-1} textAlign="center">
-                                        {/* <MKTypography display="inline" variant="h5" textTransform="capitalize" fontWeight="regular">
-                      My Personal Information
-                    </MKTypography> */}
                                         <MKBox mt={1} mb={3}>
                                             <MKTypography variant="body2" component="p" color="text">
-                                                {/* <div><span>User Name: </span>{currentUser && currentUser.username}</div>
-                        <div><span>First Name: </span>{currentUser && currentUser.firstName}</div>
-                        <div><span>Last Name: </span>{currentUser && currentUser.lastName}</div>
-                        <div><span><i class="bi bi-mailbox"></i>  Email: </span> {currentUser && currentUser.email}</div>
-                        <div><span><i class="bi bi-telephone"></i> Phone number: </span> {currentUser && currentUser.phone}</div>
-                        <div><span><i class="bi bi-calendar-heart"></i> Date of Birth: </span>{currentUser && currentUser.dob}</div> */}
-
                                                 <h1>{publicProfile && publicProfile.username}</h1>
                                                 <div><span>First Name: </span>{publicProfile && publicProfile.firstName}</div>
                                                 <div><span>Last Name: </span>{publicProfile && publicProfile.lastName}</div>

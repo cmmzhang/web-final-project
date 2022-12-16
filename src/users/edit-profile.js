@@ -4,9 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {editProfileThunk, findUserByIdThunk} from "./users-thunk";
 import {Navigate, useParams} from "react-router";
 import MKBox from "../components/MKBox";
-import bgImage from "../assets/images/bg-sign-in-basic.jpeg";
+// import bgImage from "../assets/images/bg-sign-in-basic.jpeg";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import MKTypography from "../components/MKTypography";
 import MKInput from "../components/MKInput";
 import {InputLabel, MenuItem, Select} from "@mui/material";
@@ -31,6 +30,7 @@ const EditProfile = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const bgImage = "https://images.unsplash.com/photo-1618586563625-c993ebf26c32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
 
     const handleSubmitBtn = () => {
         console.log("hi")
