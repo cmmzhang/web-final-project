@@ -49,7 +49,7 @@ const PublicProfile = () => {
             alert('You have already followed this user')
         }
     }
-    if (publicProfile.username === currentUser.username) {
+    if (currentUser && publicProfile.username === currentUser.username) {
         navigate('/profile')
     }
     useEffect(() => {
