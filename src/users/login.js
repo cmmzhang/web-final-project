@@ -35,7 +35,7 @@ const Login = () => {
 
     useEffect(() => {
         dispatch(findAllUsersThunk())
-    }, [users])
+    }, [])
 
     function getUserPassword(userName) {
         for (var i = 0; i < users.length; i++) {

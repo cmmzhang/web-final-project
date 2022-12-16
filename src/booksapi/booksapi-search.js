@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 
 
 const BooksApiSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('Becoming')
+  const [searchTerm, setSearchTerm] = useState('')
   const {books, loading} = useSelector((state) => state.booksapi)
   const dispatch = useDispatch()
   useEffect(() => {

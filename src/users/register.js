@@ -15,14 +15,14 @@ import {InputLabel, MenuItem, Select} from "@mui/material";
 
 
 const Register = () => {
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice123')
-    const [validatePassword, setValidatePassword] = useState('alice123')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [validatePassword, setValidatePassword] = useState('')
     const [error, setError] = useState(null)
-    const [firstName, setFirstName] = useState('alice')
-    const [lastName, setLastName] = useState('white')
-    const [email, setEmail] = useState('email')
-    const [phone, setPhone] = useState('000-000-0000')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [dob, setDob] = useState(null)
     const [type, setType] = useState('PROFESSIONAL')
     const [emailVisible, setEmailVisible] = useState('Visible in the public profile')
@@ -32,20 +32,18 @@ const Register = () => {
     const dispatch = useDispatch()
     const { currentUser } = useSelector((state) => state.users)
     const handleRegisterBtn = () => {
-        console.log("hi")
+
         if (password !== validatePassword) {
-            setError('Passwords must match')
+            // setError('Passwords must match')
+            alert('Passwords do not match')
             return
         }
         setError(null)
-        // const newUser = {
-        //     username: username,
-        //     password: password
-        // }
         const newUser = {
             username, password, firstName, lastName, email, phone, dob, type, emailVisible, phoneVisible, dobVisible
         }
         dispatch(registerThunk(newUser))
+
     }
     if(currentUser) {
       return (<Navigate to={'/profile'}/>)
