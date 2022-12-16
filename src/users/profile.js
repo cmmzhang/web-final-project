@@ -71,6 +71,7 @@ const Profile = () => {
                 <MKBox
                     minHeight="75vh"
                     width="100%"
+                    mt={3}
                     sx={{
                         backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
                             `${linearGradient(

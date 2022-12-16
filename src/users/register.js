@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "./users-thunk";
+import {findAllUsersThunk, loginThunk, registerThunk} from "./users-thunk";
 import {Navigate} from "react-router";
 import MKBox from "../components/MKBox";
 import bgImage from "../assets/images/illustrations/illustration-reset.jpg";
@@ -28,15 +28,30 @@ const Register = () => {
     const [emailVisible, setEmailVisible] = useState('Visible in the public profile')
     const [phoneVisible, setPhoneVisible] = useState('Visible in the public profile')
     const [dobVisible, setDobVisible] = useState('Visible in the public profile')
-
     const dispatch = useDispatch()
-    const { currentUser } = useSelector((state) => state.users)
-    const handleRegisterBtn = () => {
+    const { currentUser, users } = useSelector((state) => state.users)
 
+    useEffect(() => {
+        dispatch(findAllUsersThunk())
+    }, [])
+
+    function checkExistingUser(userName) {
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username === userName) {
+                return false;
+            }
+        }
+    }
+
+
+    const handleRegisterBtn = () => {
         if (password !== validatePassword) {
             // setError('Passwords must match')
             alert('Passwords do not match')
             return
+        }
+        if (!checkExistingUser(username)) {
+            alert('Username already exists')
         }
         setError(null)
         const newUser = {
