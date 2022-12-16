@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findUserByIdThunk } from "./users-thunk";
 import { findBooksLikedByUserThunk } from "../likes/likes-thunks";
 import { findReviewsByAuthorThunk } from "../reviews/reviews-thunks";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {
     findFollowersThunk,
     findFollowingThunk,
@@ -32,6 +32,7 @@ import Team from "../pages/LandingPages/AboutUs/sections/Team";
 
 const PublicProfile = () => {
     const { uid } = useParams()
+    const navigate = useNavigate()
     const { publicProfile, currentUser } = useSelector((state) => state.users)
     const { likes } = useSelector((state) => state.likes)
     const { reviews } = useSelector((state) => state.reviews)
@@ -40,7 +41,6 @@ const PublicProfile = () => {
     const bgImage = "https://images.unsplash.com/photo-1555116505-38ab61800975?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJvb2slMjBzaGVsZnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
 
     const handleFollowBtn = () => {
-        console.log(followers)
         if (followers.filter((follow) => follow.follower._id === currentUser._id).length === 0) {
             dispatch(followUsersThunk({
                 followed: uid
@@ -48,6 +48,9 @@ const PublicProfile = () => {
         } else {
             alert('You have already followed this user')
         }
+    }
+    if (publicProfile.username === currentUser.username) {
+        navigate('/profile')
     }
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
